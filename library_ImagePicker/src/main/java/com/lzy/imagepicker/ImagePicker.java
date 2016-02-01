@@ -236,6 +236,10 @@ public class ImagePicker {
             else takeImageFile = Environment.getDataDirectory();
             takeImageFile = createFile(takeImageFile, "IMG_", ".jpg");
             if (takeImageFile != null) {
+                // 默认情况下，即不需要指定intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                // 照相机有自己默认的存储路径，拍摄的照片将返回一个缩略图。如果想访问原始图片，
+                // 可以通过dat extra能够得到原始图片位置。即，如果指定了目标uri，data就没有数据，
+                // 如果没有指定uri，则data就返回有数据！
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(takeImageFile));
             }
         }

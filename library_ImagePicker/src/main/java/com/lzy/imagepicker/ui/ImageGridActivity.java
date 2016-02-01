@@ -213,6 +213,15 @@ public class ImageGridActivity extends BaseActivity implements ImageDataSource.O
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
+            if (resultCode == ImagePicker.RESULT_CODE_BACK) {
+                isOrigin = data.getBooleanExtra(ImagePreviewActivity.ISORIGIN, false);
+            } else {
+                //说明是从裁剪页面过来的数据，直接返回就可以
+                setResult(ImagePicker.RESULT_CODE_ITEMS, data);
+                finish();
+            }
+        } else {
+            //如果是裁剪，因为裁剪指定了存储的Uri，所以返回的data一定为null
             if (requestCode == ImagePicker.REQUEST_CODE_TAKE) {
                 //发送广播通知图片增加了
                 ImagePicker.galleryAddPic(this, imagePicker.getTakeImageFile());
@@ -229,12 +238,6 @@ public class ImageGridActivity extends BaseActivity implements ImageDataSource.O
                     setResult(ImagePicker.RESULT_CODE_ITEMS, intent);   //单选不需要裁剪，返回数据
                     finish();
                 }
-            } else if (resultCode == ImagePicker.RESULT_CODE_BACK) {
-                isOrigin = data.getBooleanExtra(ImagePreviewActivity.ISORIGIN, false);
-            } else {
-                //说明是从裁剪页面过来的数据，直接返回就可以
-                setResult(ImagePicker.RESULT_CODE_ITEMS, data);
-                finish();
             }
         }
     }
