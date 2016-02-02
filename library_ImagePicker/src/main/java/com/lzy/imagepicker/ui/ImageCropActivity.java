@@ -2,8 +2,10 @@ package com.lzy.imagepicker.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -54,7 +56,32 @@ public class ImageCropActivity extends BaseActivity implements View.OnClickListe
         mCropImageView.setFocusStyle(imagePicker.getStyle());
         mCropImageView.setFocusWidth(imagePicker.getFocusWidth());
         mCropImageView.setFocusHeight(imagePicker.getFocusHeight());
-        mCropImageView.setImageURI(Uri.fromFile(new File(imagePath)));
+
+        //缩放图片
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(imagePath, options);
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        options.inSampleSize = calculateInSampleSize(options, displayMetrics.widthPixels, displayMetrics.heightPixels);
+        options.inJustDecodeBounds = false;
+        mBitmap = BitmapFactory.decodeFile(imagePath, options);
+        mCropImageView.setImageBitmap(mBitmap);
+
+//        mCropImageView.setImageURI(Uri.fromFile(new File(imagePath)));
+    }
+
+    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        int width = options.outWidth;
+        int height = options.outHeight;
+        int inSampleSize = 1;
+        if (height > reqHeight || width > reqWidth) {
+            if (width > height) {
+                inSampleSize = width / reqWidth;
+            } else {
+                inSampleSize = height / reqHeight;
+            }
+        }
+        return inSampleSize;
     }
 
     @Override
