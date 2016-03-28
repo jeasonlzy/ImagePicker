@@ -10,7 +10,11 @@
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-    compile project(':library_ImagePicker')
+	compile 'com.lzy.widget:imagepicker:0.1.0'
+```
+或者使用
+```java
+    compile project(':imagepicker')
 ```
 
 ## 2.功能和参数含义
