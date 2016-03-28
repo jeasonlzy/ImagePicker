@@ -13,7 +13,7 @@
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
-        <activity android:name=".ui.BaseActivity"/>
+        <activity android:name=".ui.ImageBaseActivity"/>
         <activity
             android:name=".ui.ImageGridActivity"
             android:theme="@style/ImagePickerTheme"/>

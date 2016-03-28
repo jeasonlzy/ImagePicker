@@ -3,7 +3,6 @@ package com.lzy.imagepicker.ui;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -19,7 +18,7 @@ import com.lzy.imagepicker.view.CropImageView;
 import java.io.File;
 import java.util.ArrayList;
 
-public class ImageCropActivity extends BaseActivity implements View.OnClickListener, CropImageView.OnBitmapSaveCompleteListener {
+public class ImageCropActivity extends ImageBaseActivity implements View.OnClickListener, CropImageView.OnBitmapSaveCompleteListener {
 
     private CropImageView mCropImageView;
     private Bitmap mBitmap;

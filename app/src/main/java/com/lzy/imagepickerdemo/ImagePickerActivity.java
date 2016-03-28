@@ -23,9 +23,6 @@ import android.widget.Toast;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.loader.GlideImageLoader;
-import com.lzy.imagepicker.loader.PicassoImageLoader;
-import com.lzy.imagepicker.loader.UILImageLoader;
-import com.lzy.imagepicker.loader.XUtils3ImageLoader;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 

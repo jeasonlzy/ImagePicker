@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.lzy.imagepickerdemo"
-        minSdkVersion 16
-        targetSdkVersion 23
+        minSdkVersion 8
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -21,7 +21,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile project(':library_ImagePicker')
+
+    compile 'com.lzy.widget:imagepicker:0.1.0'
 }

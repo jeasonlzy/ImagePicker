@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.view.SystemBarTintManager;
 
-public class BaseActivity extends AppCompatActivity {
+public class ImageBaseActivity extends AppCompatActivity {
 
     protected SystemBarTintManager tintManager;
 
