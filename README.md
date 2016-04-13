@@ -1,16 +1,23 @@
 # ImagePicker
 ###Android自定义相册，完全仿微信UI，实现了拍照、图片选择（单选/多选）、 裁剪 、旋转、等功能。
 
-该项目参考了：[https://github.com/pengjianbo/GalleryFinal](https://github.com/pengjianbo/GalleryFinal) 和 [https://github.com/easonline/AndroidImagePicker](https://github.com/easonline/AndroidImagePicker)，喜欢原作的可以去使用。同时欢迎大家下载体验本项目，如果使用过程中遇到什么问题，欢迎反馈。
+该项目参考了：
+
+* [https://github.com/pengjianbo/GalleryFinal](https://github.com/pengjianbo/GalleryFinal) 
+* [https://github.com/easonline/AndroidImagePicker](https://github.com/easonline/AndroidImagePicker)
+
+喜欢原作的可以去使用。同时欢迎大家下载体验本项目，如果使用过程中遇到什么问题，欢迎反馈。
 
 ## 演示
- ![image](https://github.com/jeasonlzy0216/ImagePicker/blob/master/screenshots/demo1.png)![image](https://github.com/jeasonlzy0216/ImagePicker/blob/master/screenshots/demo2.gif)![image](https://github.com/jeasonlzy0216/ImagePicker/blob/master/screenshots/demo3.gif)
+ ![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo1.png)![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo2.gif)![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo3.gif)
 
 ## 1.用法
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-	compile 'com.lzy.widget:imagepicker:0.1.0'
+	compile 'com.lzy.widget:imagepicker:0.1.1'  //指定版本
+
+	compile 'com.lzy.widget:imagepicker:+'      //最新版本
 ```
 或者使用
 ```java

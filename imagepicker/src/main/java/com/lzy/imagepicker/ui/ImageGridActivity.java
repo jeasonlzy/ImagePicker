@@ -15,11 +15,11 @@ import android.widget.PopupWindow;
 import com.lzy.imagepicker.ImageDataSource;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
+import com.lzy.imagepicker.Utils;
 import com.lzy.imagepicker.adapter.ImageFolderAdapter;
 import com.lzy.imagepicker.adapter.ImageGridAdapter;
 import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
-import com.lzy.imagepicker.Utils;
 
 import java.util.List;
 
@@ -221,7 +221,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             }
         } else {
             //如果是裁剪，因为裁剪指定了存储的Uri，所以返回的data一定为null
-            if (requestCode == ImagePicker.REQUEST_CODE_TAKE) {
+            if (resultCode == RESULT_OK && requestCode == ImagePicker.REQUEST_CODE_TAKE) {
                 //发送广播通知图片增加了
                 ImagePicker.galleryAddPic(this, imagePicker.getTakeImageFile());
                 ImageItem imageItem = new ImageItem();
