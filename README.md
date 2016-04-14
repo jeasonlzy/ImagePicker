@@ -21,7 +21,7 @@
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-	compile 'com.lzy.widget:imagepicker:0.1.1'  //指定版本
+	compile 'com.lzy.widget:imagepicker:0.1.2'  //指定版本
 
 	compile 'com.lzy.widget:imagepicker:+'      //最新版本
 ```

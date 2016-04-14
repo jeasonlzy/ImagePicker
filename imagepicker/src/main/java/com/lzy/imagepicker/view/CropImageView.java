@@ -16,7 +16,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -96,7 +98,7 @@ public class CropImageView extends ImageView {
     private float mMaxScale = MAX_SCALE;//程序根据不同图片的大小，动态得到的最大缩放比
     private boolean isInited = false;   //是否经过了 onSizeChanged 初始化
     private boolean mSaving = false;    //是否正在保存
-    private Handler mHandler = new InnerHandler();
+    private static Handler mHandler = new InnerHandler();
 
     public CropImageView(Context context) {
         this(context, null);
@@ -350,6 +352,8 @@ public class CropImageView extends ImageView {
                 mode = NONE;
                 break;
         }
+        //解决部分机型无法拖动的问题
+        ViewCompat.postInvalidateOnAnimation(this);
         return true;
     }
 
@@ -579,23 +583,27 @@ public class CropImageView extends ImageView {
         croppedImage.recycle();
     }
 
-    private class InnerHandler extends Handler {
+    private static class InnerHandler extends Handler {
+        public InnerHandler() {
+            super(Looper.getMainLooper());
+        }
+
         @Override
         public void handleMessage(Message msg) {
             File saveFile = (File) msg.obj;
             switch (msg.what) {
                 case SAVE_SUCCESS:
-                    if (listener != null) listener.onBitmapSaveSuccess(saveFile);
+                    if (mListener != null) mListener.onBitmapSaveSuccess(saveFile);
                     break;
                 case SAVE_ERROR:
-                    if (listener != null) listener.onBitmapSaveError(saveFile);
+                    if (mListener != null) mListener.onBitmapSaveError(saveFile);
                     break;
             }
         }
     }
 
     /** 图片保存完成的监听 */
-    private OnBitmapSaveCompleteListener listener;
+    private static OnBitmapSaveCompleteListener mListener;
 
     public interface OnBitmapSaveCompleteListener {
         void onBitmapSaveSuccess(File file);
@@ -604,7 +612,7 @@ public class CropImageView extends ImageView {
     }
 
     public void setOnBitmapSaveCompleteListener(OnBitmapSaveCompleteListener listener) {
-        this.listener = listener;
+        mListener = listener;
     }
 
     /** 返回焦点框宽度 */
