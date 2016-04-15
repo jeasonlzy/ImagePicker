@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
-import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.Utils;
+import com.lzy.imagepicker.bean.ImageFolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +64,12 @@ public class ImageFolderAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    public int getItemViewHeight() {
+        View itemView = mInflater.inflate(R.layout.adapter_folder_list_item, null);
+        itemView.measure(0, 0);
+        return itemView.getMeasuredHeight();
     }
 
     @Override

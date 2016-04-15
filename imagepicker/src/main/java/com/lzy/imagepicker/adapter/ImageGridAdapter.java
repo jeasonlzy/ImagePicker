@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
-import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.Utils;
+import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.view.SuperCheckBox;
 
 import java.util.ArrayList;
@@ -41,8 +41,8 @@ public class ImageGridAdapter extends BaseAdapter {
 
     public ImageGridAdapter(Activity activity, ArrayList<ImageItem> images) {
         this.mActivity = activity;
-        if (images != null && images.size() > 0) this.images = images;
-        else this.images = new ArrayList<>();
+        if (images == null || images.size() == 0) this.images = new ArrayList<>();
+        else this.images = images;
 
         mImageSize = Utils.getImageItemWidth(mActivity);
         imagePicker = ImagePicker.getInstance();
@@ -51,8 +51,8 @@ public class ImageGridAdapter extends BaseAdapter {
     }
 
     public void refreshData(ArrayList<ImageItem> images) {
-        if (images != null && images.size() > 0) this.images = images;
-        else this.images.clear();
+        if (images == null || images.size() == 0) this.images = new ArrayList<>();
+        else this.images = images;
         notifyDataSetChanged();
     }
 
@@ -115,8 +115,7 @@ public class ImageGridAdapter extends BaseAdapter {
             holder.ivThumb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener != null)
-                        listener.onImageItemClick(holder.rootView, imageItem, position);
+                    if (listener != null) listener.onImageItemClick(holder.rootView, imageItem, position);
                 }
             });
             holder.cbCheck.setOnClickListener(new View.OnClickListener() {

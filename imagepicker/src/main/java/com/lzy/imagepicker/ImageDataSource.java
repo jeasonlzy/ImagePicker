@@ -58,12 +58,10 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
         CursorLoader cursorLoader = null;
         //扫描所有图片
         if (id == LOADER_ALL)
-            cursorLoader = new CursorLoader(activity, MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    IMAGE_PROJECTION, null, null, IMAGE_PROJECTION[6] + " DESC");
+            cursorLoader = new CursorLoader(activity, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION, null, null, IMAGE_PROJECTION[6] + " DESC");
         //扫描某个图片文件夹
         if (id == LOADER_CATEGORY)
-            cursorLoader = new CursorLoader(activity, MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    IMAGE_PROJECTION, IMAGE_PROJECTION[1] + " like '%" + args.getString("path") + "%'", null, IMAGE_PROJECTION[6] + " DESC");
+            cursorLoader = new CursorLoader(activity, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION, IMAGE_PROJECTION[1] + " like '%" + args.getString("path") + "%'", null, IMAGE_PROJECTION[6] + " DESC");
 
         return cursorLoader;
     }
@@ -72,9 +70,6 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         imageFolders.clear();
         if (data != null) {
-            int count = data.getCount();
-            if (count <= 0) return;
-
             ArrayList<ImageItem> allImages = new ArrayList<>();   //所有图片的集合,不分文件夹
             while (data.moveToNext()) {
                 //查询数据
@@ -112,24 +107,26 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
                     imageFolders.get(imageFolders.indexOf(imageFolder)).images.add(imageItem);
                 }
             }
-
-            //构造所有图片的集合
-            ImageFolder allImagesFolder = new ImageFolder();
-            allImagesFolder.name = activity.getResources().getString(R.string.all_images);
-            allImagesFolder.path = "/";
-            allImagesFolder.cover = allImages.get(0);
-            allImagesFolder.images = allImages;
-            imageFolders.add(0, allImagesFolder);  //确保第一条是所有图片
-
-            //回调接口，通知图片数据准备完成
-            ImagePicker.getInstance().setImageFolders(imageFolders);
-            loadedListener.onImagesLoaded(imageFolders);
+            //防止没有图片报异常
+            if (data.getCount() > 0) {
+                //构造所有图片的集合
+                ImageFolder allImagesFolder = new ImageFolder();
+                allImagesFolder.name = activity.getResources().getString(R.string.all_images);
+                allImagesFolder.path = "/";
+                allImagesFolder.cover = allImages.get(0);
+                allImagesFolder.images = allImages;
+                imageFolders.add(0, allImagesFolder);  //确保第一条是所有图片
+            }
         }
+
+        //回调接口，通知图片数据准备完成
+        ImagePicker.getInstance().setImageFolders(imageFolders);
+        loadedListener.onImagesLoaded(imageFolders);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        System.out.println("--------");
     }
 
     /** 所有图片加载完成的回调接口 */

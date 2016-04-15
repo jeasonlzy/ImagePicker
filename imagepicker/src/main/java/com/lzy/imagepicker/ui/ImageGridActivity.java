@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -93,6 +94,10 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             setResult(ImagePicker.RESULT_CODE_ITEMS, intent);  //多选不允许裁剪裁剪，返回数据
             finish();
         } else if (id == R.id.btn_dir) {
+            if (mImageFolders == null) {
+                Log.i("ImageGridActivity", "您的手机没有图片");
+                return;
+            }
             //点击文件夹按钮
             if (mFolderPopupWindow == null) createPopupFolderList(screenWidth, screenHeight);
             backgroundAlpha(0.3f);   //改变View的背景透明度
@@ -125,7 +130,10 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         mFolderPopupWindow.setAdapter(mImageFolderAdapter);
         mFolderPopupWindow.setContentWidth(width);
         mFolderPopupWindow.setWidth(width);  //如果不设置，就是 AnchorView 的宽度
-        mFolderPopupWindow.setHeight(height * 5 / 8);
+        int maxHeight = height * 5 / 8;
+        int realHeight = mImageFolderAdapter.getItemViewHeight() * mImageFolderAdapter.getCount();
+        int popHeight = realHeight > maxHeight ? maxHeight : realHeight;
+        mFolderPopupWindow.setHeight(popHeight);
         mFolderPopupWindow.setAnchorView(mFooterBar);  //ListPopupWindow总会相对于这个View
         mFolderPopupWindow.setModal(true);  //是否为模态，影响返回键的处理
         mFolderPopupWindow.setAnimationStyle(R.style.popupwindow_anim_style);
@@ -162,7 +170,8 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     public void onImagesLoaded(List<ImageFolder> imageFolders) {
         this.mImageFolders = imageFolders;
         imagePicker.setImageFolders(imageFolders);
-        mImageGridAdapter.refreshData(imageFolders.get(0).images);
+        if (imageFolders.size() == 0) mImageGridAdapter.refreshData(null);
+        else mImageGridAdapter.refreshData(imageFolders.get(0).images);
         mImageGridAdapter.setOnImageItemClickListener(this);
         mGridView.setAdapter(mImageGridAdapter);
         mImageFolderAdapter.refreshData(imageFolders);
@@ -215,9 +224,15 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             if (resultCode == ImagePicker.RESULT_CODE_BACK) {
                 isOrigin = data.getBooleanExtra(ImagePreviewActivity.ISORIGIN, false);
             } else {
-                //说明是从裁剪页面过来的数据，直接返回就可以
-                setResult(ImagePicker.RESULT_CODE_ITEMS, data);
-                finish();
+                //从拍照界面返回
+                //点击 X , 没有选择照片
+                if (data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS) == null) {
+                    //什么都不做
+                } else {
+                    //说明是从裁剪页面过来的数据，直接返回就可以
+                    setResult(ImagePicker.RESULT_CODE_ITEMS, data);
+                    finish();
+                }
             }
         } else {
             //如果是裁剪，因为裁剪指定了存储的Uri，所以返回的data一定为null
