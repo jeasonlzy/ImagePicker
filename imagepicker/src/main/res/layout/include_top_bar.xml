@@ -48,5 +48,17 @@
         android:padding="8dp"
         android:text="完成(3/9)"
         android:textColor="#ffffff"
-        android:textSize="14dp"/>
+        android:textSize="14dp"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/btn_del"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/selector_back_press"
+        android:padding="14dp"
+        android:src="@mipmap/ic_del"
+        android:visibility="gone"/>
 </RelativeLayout>

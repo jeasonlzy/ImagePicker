@@ -16,14 +16,13 @@
 
 ## 演示
  ![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo1.png)![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo2.gif)
- ![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo3.gif)
- ![image](https://github.com/ikkong/ImagePicker/blob/master/gif/wxdemo.gif)
+ ![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo3.gif)![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo4.gif)
 
 ## 1.用法
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-	compile 'com.lzy.widget:imagepicker:0.1.4'  //指定版本
+	compile 'com.lzy.widget:imagepicker:0.2.1'  //指定版本
 
 	compile 'com.lzy.widget:imagepicker:+'      //最新版本
 ```

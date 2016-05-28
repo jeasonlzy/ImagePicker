@@ -9,11 +9,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- 从SDCard读取数据权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
 
-    <application
-        android:allowBackup="true"
-        android:supportsRtl="true">
+    <application>
         <activity android:name=".ui.ImageBaseActivity"/>
         <activity
             android:name=".ui.ImageGridActivity"
@@ -23,9 +22,6 @@
             android:theme="@style/ImagePickerTheme"/>
         <activity
             android:name=".ui.ImagePreviewActivity"
-            android:theme="@style/ImagePickerThemeFullScreen"/>
-        <activity android:name="com.ikkong.wximagepicker.ImagePreviewDelActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/ImagePickerThemeFullScreen"/>
     </application>
 

@@ -20,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:background="#cc22292c">
+        android:background="#cc22292c"
+        android:visibility="gone">
 
         <com.lzy.imagepicker.view.SuperCheckBox
             android:id="@+id/cb_origin"

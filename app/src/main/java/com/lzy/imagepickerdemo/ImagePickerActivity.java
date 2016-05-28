@@ -25,10 +25,23 @@ import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.loader.GlideImageLoader;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
+import com.lzy.imagepickerdemo.imageloader.PicassoImageLoader;
+import com.lzy.imagepickerdemo.imageloader.UILImageLoader;
+import com.lzy.imagepickerdemo.imageloader.XUtils3ImageLoader;
+import com.lzy.imagepickerdemo.wxdemo.WxDemoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ================================================
+ * 作    者：jeasonlzy（廖子尧 Github地址：https://github.com/jeasonlzy0216
+ * 版    本：1.0
+ * 创建日期：2016/5/19
+ * 描    述：
+ * 修订历史：
+ * ================================================
+ */
 public class ImagePickerActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     private ImagePicker imagePicker;
@@ -50,8 +63,6 @@ public class ImagePickerActivity extends AppCompatActivity implements SeekBar.On
     private EditText et_crop_radius;
     private EditText et_outputx;
     private EditText et_outputy;
-    
-    private Button btn_wxDemo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +115,10 @@ public class ImagePickerActivity extends AppCompatActivity implements SeekBar.On
 
         Button btn_open_gallery = (Button) findViewById(R.id.btn_open_gallery);
         btn_open_gallery.setOnClickListener(this);
+        Button btn_wxDemo = (Button) findViewById(R.id.btn_wxDemo);
+        btn_wxDemo.setOnClickListener(this);
 
         gridView = (GridView) findViewById(R.id.gridview);
-
-        btn_wxDemo = (Button) findViewById(R.id.btn_wxDemo);
-        btn_wxDemo.setOnClickListener(this);
     }
 
     @Override
@@ -117,11 +127,9 @@ public class ImagePickerActivity extends AppCompatActivity implements SeekBar.On
             case R.id.btn_open_gallery:
                 if (rb_uil.isChecked()) imagePicker.setImageLoader(new UILImageLoader());
                 else if (rb_glide.isChecked()) imagePicker.setImageLoader(new GlideImageLoader());
-                else if (rb_picasso.isChecked())
-                    imagePicker.setImageLoader(new PicassoImageLoader());
+                else if (rb_picasso.isChecked()) imagePicker.setImageLoader(new PicassoImageLoader());
                 else if (rb_fresco.isChecked()) imagePicker.setImageLoader(new GlideImageLoader());
-                else if (rb_xutils3.isChecked())
-                    imagePicker.setImageLoader(new XUtils3ImageLoader());
+                else if (rb_xutils3.isChecked()) imagePicker.setImageLoader(new XUtils3ImageLoader());
                 else if (rb_xutils.isChecked()) imagePicker.setImageLoader(new GlideImageLoader());
 
                 if (rb_single_select.isChecked()) imagePicker.setMultiMode(false);
@@ -150,7 +158,7 @@ public class ImagePickerActivity extends AppCompatActivity implements SeekBar.On
                 startActivityForResult(intent, 100);
                 break;
             case R.id.btn_wxDemo:
-                startActivity(new Intent(this,WxDemoActivity.class));
+                startActivity(new Intent(this, WxDemoActivity.class));
                 break;
         }
     }
@@ -178,12 +186,10 @@ public class ImagePickerActivity extends AppCompatActivity implements SeekBar.On
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-
     }
 
     @Override

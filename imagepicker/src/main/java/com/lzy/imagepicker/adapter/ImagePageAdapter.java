@@ -7,14 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.Utils;
+import com.lzy.imagepicker.bean.ImageItem;
 
 import java.util.ArrayList;
 
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
+/**
+ * ================================================
+ * 作    者：jeasonlzy（廖子尧 Github地址：https://github.com/jeasonlzy0216
+ * 版    本：1.0
+ * 创建日期：2016/5/19
+ * 描    述：
+ * 修订历史：
+ * ================================================
+ */
 public class ImagePageAdapter extends PagerAdapter {
 
     private int screenWidth;
@@ -32,6 +41,10 @@ public class ImagePageAdapter extends PagerAdapter {
         screenWidth = dm.widthPixels;
         screenHeight = dm.heightPixels;
         imagePicker = ImagePicker.getInstance();
+    }
+
+    public void setData(ArrayList<ImageItem> images) {
+        this.images = images;
     }
 
     public void setPhotoViewClickListener(PhotoViewClickListener listener) {

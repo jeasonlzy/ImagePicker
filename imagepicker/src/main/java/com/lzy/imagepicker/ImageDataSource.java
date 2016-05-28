@@ -15,7 +15,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 加载手机图片实现类 */
+/**
+ * ================================================
+ * 作    者：jeasonlzy（廖子尧 Github地址：https://github.com/jeasonlzy0216
+ * 版    本：1.0
+ * 创建日期：2016/5/19
+ * 描    述：加载手机图片实现类
+ * 修订历史：
+ * ================================================
+ */
 public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final int LOADER_ALL = 0;         //加载所有图片
