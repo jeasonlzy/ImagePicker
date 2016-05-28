@@ -16,7 +16,7 @@
 
 ## 演示
  ![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo1.png)![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo2.gif)
- ![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo3.gif)![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo4.gif)
+ ![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo3.gif)![image](http://7xss53.com1.z0.glb.clouddn.com/imagepicker/demo5.gif)
 
 ## 1.用法
 
