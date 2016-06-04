@@ -32,7 +32,7 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
     private boolean isOrigin;                      //是否选中原图
     private SuperCheckBox mCbCheck;                //是否选中当前图片的CheckBox
     private SuperCheckBox mCbOrigin;               //原图
-    private Button mBtnOk;                       //确认图片的选择
+    private Button mBtnOk;                         //确认图片的选择
     private View bottomBar;
 
     @Override

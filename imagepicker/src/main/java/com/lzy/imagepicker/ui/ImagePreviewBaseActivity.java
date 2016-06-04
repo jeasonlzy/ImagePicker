@@ -53,6 +53,7 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) topBar.getLayoutParams();
         params.topMargin = Utils.getStatusHeight(this);
         topBar.setLayoutParams(params);
+        topBar.findViewById(R.id.btn_ok).setVisibility(View.GONE);
 
         mTitleCount = (TextView) findViewById(R.id.tv_des);
 

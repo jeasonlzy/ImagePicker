@@ -48,8 +48,7 @@
         android:padding="8dp"
         android:text="完成(3/9)"
         android:textColor="#ffffff"
-        android:textSize="14dp"
-        android:visibility="gone"/>
+        android:textSize="14dp"/>
 
     <ImageView
         android:id="@+id/btn_del"
