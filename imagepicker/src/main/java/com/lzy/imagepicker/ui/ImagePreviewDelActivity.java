@@ -31,6 +31,7 @@ public class ImagePreviewDelActivity extends ImagePreviewBaseActivity implements
         ImageView mBtnDel = (ImageView) findViewById(R.id.btn_del);
         mBtnDel.setOnClickListener(this);
         mBtnDel.setVisibility(View.VISIBLE);
+        topBar.findViewById(R.id.btn_back).setOnClickListener(this);
 
         mTitleCount.setText(getString(R.string.preview_image_count, mCurrentPosition + 1, mImageItems.size()));
         //滑动ViewPager的时候，根据外界的数据改变当前的选中状态和当前的图片的位置描述文本
