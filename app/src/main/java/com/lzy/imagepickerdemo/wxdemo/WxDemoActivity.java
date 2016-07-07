@@ -9,11 +9,11 @@ import android.view.View;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
-import com.lzy.imagepicker.loader.GlideImageLoader;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.lzy.imagepickerdemo.R;
+import com.lzy.imagepickerdemo.imageloader.GlideImageLoader;
 
 import java.util.ArrayList;
 

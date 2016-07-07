@@ -1,4 +1,4 @@
-package com.lzy.imagepicker.loader;
+package com.lzy.imagepickerdemo.imageloader;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -6,7 +6,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.lzy.imagepicker.R;
+import com.lzy.imagepicker.loader.ImageLoader;
+import com.lzy.imagepickerdemo.R;
 
 import java.io.File;
 

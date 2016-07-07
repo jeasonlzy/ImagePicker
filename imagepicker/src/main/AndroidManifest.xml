@@ -21,6 +21,7 @@
         <activity
             android:name=".ui.ImageCropActivity"
             android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="false"
             android:theme="@style/ImagePickerTheme"/>
         <activity
             android:name=".ui.ImagePreviewActivity"
