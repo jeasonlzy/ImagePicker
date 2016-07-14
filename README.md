@@ -11,7 +11,7 @@
 ### 联系方式
  * 邮箱地址： liaojeason@126.com
  * QQ群： 489873144 （建议使用QQ群，邮箱使用较少，可能看的不及时）
- * 本群刚建立，旨在为使用我的github项目的人提供方便，如果遇到问题欢迎在群里提问。个人能力也有限，希望一起学习一起进步。
+ * 本群旨在为使用我的github项目的人提供方便，如果遇到问题欢迎在群里提问。个人能力也有限，希望一起学习一起进步。
 
 
 ## 演示
@@ -22,7 +22,7 @@
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-	compile 'com.lzy.widget:imagepicker:0.2.6'  //指定版本
+	compile 'com.lzy.widget:imagepicker:0.3.0'  //指定版本
 
 	compile 'com.lzy.widget:imagepicker:+'      //最新版本
 ```
@@ -91,14 +91,36 @@
 </table>
 
 ## 3.代码参考
-### 1.首先配置图片选择器，一般初始化配置一次就可以
+### 0.首先你需要继承 `com.lzy.imagepicker.loader.ImageLoader` 这个接口,实现其中的方法,比如以下代码是使用 `Picasso` 三方加载库实现的
+```java
+    public class PicassoImageLoader implements ImageLoader {
+    
+        @Override
+        public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
+            Picasso.with(activity)//
+                    .load(new File(path))//
+                    .placeholder(R.mipmap.default_image)//
+                    .error(R.mipmap.default_image)//
+                    .resize(width, height)//
+                    .centerInside()//
+                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)//
+                    .into(imageView);
+        }
+    
+        @Override
+        public void clearMemoryCache() {
+            //这里是清除缓存的方法,根据需要自己实现
+        }
+    }
+```
+### 1.然后配置图片选择器，一般在Application初始化配置一次就可以,这里就需要将上面的图片加载器设置进来,其余的配置根据需要设置
 ```java
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_picker);
 
         ImagePicker imagePicker = ImagePicker.getInstance();
-        imagePicker.setImageLoader(new GlideImageLoader());   //设置图片加载器
+        imagePicker.setImageLoader(new PicassoImageLoader());   //设置图片加载器
 		imagePicker.setShowCamera(true);  //显示拍照按钮
 		imagePicker.setCrop(true);        //允许裁剪（单选才有效）
 		imagePicker.setSaveRectangle(true); //是否按矩形区域保存
