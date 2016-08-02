@@ -66,12 +66,6 @@ public class ImageFolderAdapter extends BaseAdapter {
         return position;
     }
 
-    public int getItemViewHeight() {
-        View itemView = mInflater.inflate(R.layout.adapter_folder_list_item, null);
-        itemView.measure(0, 0);
-        return itemView.getMeasuredHeight();
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
