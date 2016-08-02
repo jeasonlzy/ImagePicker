@@ -1,8 +1,12 @@
 package com.lzy.imagepicker.ui;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -13,7 +17,6 @@ import android.widget.GridView;
 import com.lzy.imagepicker.ImageDataSource;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
-import com.lzy.imagepicker.Utils;
 import com.lzy.imagepicker.adapter.ImageFolderAdapter;
 import com.lzy.imagepicker.adapter.ImageGridAdapter;
 import com.lzy.imagepicker.bean.ImageFolder;
@@ -33,13 +36,13 @@ import java.util.List;
  */
 public class ImageGridActivity extends ImageBaseActivity implements ImageDataSource.OnImagesLoadedListener, ImageGridAdapter.OnImageItemClickListener, ImagePicker.OnImageSelectedListener, View.OnClickListener {
 
+    public static final int REQUEST_PERMISSION_STORAGE = 0x01;
+    public static final int REQUEST_PERMISSION_CAMERA = 0x02;
+
     private ImagePicker imagePicker;
 
     private boolean isOrigin = false;  //是否选中原图
-    private int screenWidth;     //屏幕的宽
-    private int screenHeight;    //屏幕的高
     private GridView mGridView;  //图片展示控件
-    private View mTopBar;        //顶部栏
     private View mFooterBar;     //底部栏
     private Button mBtnOk;       //确定按钮
     private Button mBtnDir;      //文件夹切换按钮
@@ -48,7 +51,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     private FolderPopUpWindow mFolderPopupWindow;  //ImageSet的PopupWindow
     private List<ImageFolder> mImageFolders;   //所有的图片文件夹
     private ImageGridAdapter mImageGridAdapter;  //图片九宫格展示的适配器
-    private View content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +60,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         imagePicker = ImagePicker.getInstance();
         imagePicker.clear();
         imagePicker.addOnImageSelectedListener(this);
-        DisplayMetrics dm = Utils.getScreenPix(this);
-        screenWidth = dm.widthPixels;
-        screenHeight = dm.heightPixels;
 
         findViewById(R.id.btn_back).setOnClickListener(this);
         mBtnOk = (Button) findViewById(R.id.btn_ok);
@@ -70,9 +69,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         mBtnPre = (Button) findViewById(R.id.btn_preview);
         mBtnPre.setOnClickListener(this);
         mGridView = (GridView) findViewById(R.id.gridview);
-        mTopBar = findViewById(R.id.top_bar);
         mFooterBar = findViewById(R.id.footer_bar);
-        content = findViewById(R.id.content);
         if (imagePicker.isMultiMode()) {
             mBtnOk.setVisibility(View.VISIBLE);
             mBtnPre.setVisibility(View.VISIBLE);
@@ -85,7 +82,32 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         mImageFolderAdapter = new ImageFolderAdapter(this, null);
 
         onImageSelected(0, null, false);
-        new ImageDataSource(this, null, this);
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+            if (checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                new ImageDataSource(this, null, this);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_STORAGE);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSION_STORAGE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                new ImageDataSource(this, null, this);
+            } else {
+                showToast("权限被禁止，无法选择本地图片");
+            }
+        } else if (requestCode == REQUEST_PERMISSION_CAMERA) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
+            } else {
+                showToast("权限被禁止，无法打开相机");
+            }
+        }
     }
 
     @Override

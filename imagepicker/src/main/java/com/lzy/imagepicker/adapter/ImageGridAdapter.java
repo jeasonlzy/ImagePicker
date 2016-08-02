@@ -1,6 +1,8 @@
 package com.lzy.imagepicker.adapter;
 
+import android.Manifest;
 import android.app.Activity;
+import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.Utils;
 import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageBaseActivity;
+import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.SuperCheckBox;
 
 import java.util.ArrayList;
@@ -97,7 +101,11 @@ public class ImageGridAdapter extends BaseAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imagePicker.takePicture(mActivity, ImagePicker.REQUEST_CODE_TAKE);
+                    if (!((ImageBaseActivity) mActivity).checkPermission(Manifest.permission.CAMERA)) {
+                        ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.CAMERA}, ImageGridActivity.REQUEST_PERMISSION_CAMERA);
+                    } else {
+                        imagePicker.takePicture(mActivity, ImagePicker.REQUEST_CODE_TAKE);
+                    }
                 }
             });
         } else {
@@ -123,7 +131,7 @@ public class ImageGridAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     int selectLimit = imagePicker.getSelectLimit();
                     if (holder.cbCheck.isChecked() && mSelectedImages.size() >= selectLimit) {
-//                        Toast.makeText(mActivity, mActivity.getString(R.string.select_limit, selectLimit), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.select_limit, selectLimit), Toast.LENGTH_SHORT).show();
                         holder.cbCheck.setChecked(false);
                         holder.mask.setVisibility(View.GONE);
                     } else {

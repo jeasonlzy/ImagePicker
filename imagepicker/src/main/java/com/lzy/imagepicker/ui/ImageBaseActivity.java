@@ -1,11 +1,15 @@
 package com.lzy.imagepicker.ui;
 
 import android.annotation.TargetApi;
+import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.view.SystemBarTintManager;
@@ -45,5 +49,13 @@ public class ImageBaseActivity extends AppCompatActivity {
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
+    }
+
+    public boolean checkPermission(@NonNull String permission) {
+        return ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public void showToast(String toastText) {
+        Toast.makeText(getApplicationContext(), toastText, Toast.LENGTH_SHORT).show();
     }
 }
