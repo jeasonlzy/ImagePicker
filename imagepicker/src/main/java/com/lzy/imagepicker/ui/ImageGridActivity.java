@@ -1,26 +1,27 @@
 package com.lzy.imagepicker.ui;
 
+import android.Manifest;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListPopupWindow;
-import android.widget.PopupWindow;
 
 import com.lzy.imagepicker.ImageDataSource;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
-import com.lzy.imagepicker.Utils;
 import com.lzy.imagepicker.adapter.ImageFolderAdapter;
 import com.lzy.imagepicker.adapter.ImageGridAdapter;
 import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.view.FolderPopUpWindow;
 
 import java.util.List;
 
@@ -35,19 +36,19 @@ import java.util.List;
  */
 public class ImageGridActivity extends ImageBaseActivity implements ImageDataSource.OnImagesLoadedListener, ImageGridAdapter.OnImageItemClickListener, ImagePicker.OnImageSelectedListener, View.OnClickListener {
 
+    public static final int REQUEST_PERMISSION_STORAGE = 0x01;
+    public static final int REQUEST_PERMISSION_CAMERA = 0x02;
+
     private ImagePicker imagePicker;
 
     private boolean isOrigin = false;  //是否选中原图
-    private int screenWidth;     //屏幕的宽
-    private int screenHeight;    //屏幕的高
     private GridView mGridView;  //图片展示控件
-    private View mTopBar;        //顶部栏
     private View mFooterBar;     //底部栏
     private Button mBtnOk;       //确定按钮
     private Button mBtnDir;      //文件夹切换按钮
     private Button mBtnPre;      //预览按钮
     private ImageFolderAdapter mImageFolderAdapter;    //图片文件夹的适配器
-    private ListPopupWindow mFolderPopupWindow;  //ImageSet的PopupWindow
+    private FolderPopUpWindow mFolderPopupWindow;  //ImageSet的PopupWindow
     private List<ImageFolder> mImageFolders;   //所有的图片文件夹
     private ImageGridAdapter mImageGridAdapter;  //图片九宫格展示的适配器
 
@@ -59,9 +60,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         imagePicker = ImagePicker.getInstance();
         imagePicker.clear();
         imagePicker.addOnImageSelectedListener(this);
-        DisplayMetrics dm = Utils.getScreenPix(this);
-        screenWidth = dm.widthPixels;
-        screenHeight = dm.heightPixels;
 
         findViewById(R.id.btn_back).setOnClickListener(this);
         mBtnOk = (Button) findViewById(R.id.btn_ok);
@@ -71,7 +69,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         mBtnPre = (Button) findViewById(R.id.btn_preview);
         mBtnPre.setOnClickListener(this);
         mGridView = (GridView) findViewById(R.id.gridview);
-        mTopBar = findViewById(R.id.top_bar);
         mFooterBar = findViewById(R.id.footer_bar);
         if (imagePicker.isMultiMode()) {
             mBtnOk.setVisibility(View.VISIBLE);
@@ -85,7 +82,32 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         mImageFolderAdapter = new ImageFolderAdapter(this, null);
 
         onImageSelected(0, null, false);
-        new ImageDataSource(this, null, this);
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+            if (checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                new ImageDataSource(this, null, this);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_STORAGE);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSION_STORAGE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                new ImageDataSource(this, null, this);
+            } else {
+                showToast("权限被禁止，无法选择本地图片");
+            }
+        } else if (requestCode == REQUEST_PERMISSION_CAMERA) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
+            } else {
+                showToast("权限被禁止，无法打开相机");
+            }
+        }
     }
 
     @Override
@@ -108,17 +130,16 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
                 return;
             }
             //点击文件夹按钮
-            if (mFolderPopupWindow == null) createPopupFolderList(screenWidth, screenHeight);
-            backgroundAlpha(0.3f);   //改变View的背景透明度
+            createPopupFolderList();
             mImageFolderAdapter.refreshData(mImageFolders);  //刷新数据
             if (mFolderPopupWindow.isShowing()) {
                 mFolderPopupWindow.dismiss();
             } else {
-                mFolderPopupWindow.show();
+                mFolderPopupWindow.showAtLocation(mFooterBar, Gravity.NO_GRAVITY, 0, 0);
                 //默认选择当前选择的上一个，当目录很多时，直接定位到已选中的条目
                 int index = mImageFolderAdapter.getSelectIndex();
                 index = index == 0 ? index : index - 1;
-                mFolderPopupWindow.getListView().setSelection(index);
+                mFolderPopupWindow.setSelection(index);
             }
         } else if (id == R.id.btn_preview) {
             Intent intent = new Intent(ImageGridActivity.this, ImagePreviewActivity.class);
@@ -133,26 +154,9 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     }
 
     /** 创建弹出的ListView */
-    private void createPopupFolderList(int width, int height) {
-        mFolderPopupWindow = new ListPopupWindow(this);
-        mFolderPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mFolderPopupWindow.setAdapter(mImageFolderAdapter);
-        mFolderPopupWindow.setContentWidth(width);
-        mFolderPopupWindow.setWidth(width);  //如果不设置，就是 AnchorView 的宽度
-        int maxHeight = height * 5 / 8;
-        int realHeight = mImageFolderAdapter.getItemViewHeight() * mImageFolderAdapter.getCount();
-        int popHeight = realHeight > maxHeight ? maxHeight : realHeight;
-        mFolderPopupWindow.setHeight(popHeight);
-        mFolderPopupWindow.setAnchorView(mFooterBar);  //ListPopupWindow总会相对于这个View
-        mFolderPopupWindow.setModal(true);  //是否为模态，影响返回键的处理
-        mFolderPopupWindow.setAnimationStyle(R.style.popupwindow_anim_style);
-        mFolderPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                backgroundAlpha(1.0f);
-            }
-        });
-        mFolderPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void createPopupFolderList() {
+        mFolderPopupWindow = new FolderPopUpWindow(this, mImageFolderAdapter);
+        mFolderPopupWindow.setOnItemClickListener(new FolderPopUpWindow.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 mImageFolderAdapter.setSelectIndex(position);
@@ -166,13 +170,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
                 mGridView.smoothScrollToPosition(0);//滑动到顶部
             }
         });
-    }
-
-    /** 设置屏幕透明度  0.0透明  1.0不透明 */
-    public void backgroundAlpha(float alpha) {
-        mGridView.setAlpha(alpha);
-        mTopBar.setAlpha(alpha);
-        mFooterBar.setAlpha(1.0f);
+        mFolderPopupWindow.setMargin(mFooterBar.getHeight());
     }
 
     @Override
