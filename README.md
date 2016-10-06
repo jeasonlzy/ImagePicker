@@ -15,8 +15,8 @@
 
 
 ## 演示
- ![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo1.png)![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo2.gif)
- ![image](http://7xss53.com2.z0.glb.clouddn.com/imagepicker/demo3.gif)![image](http://7xss53.com1.z0.glb.clouddn.com/imagepicker/demo5.gif)
+ ![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo1.png)![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo2.gif)
+ ![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo3.gif)![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo5.gif)
 
 ## 1.用法
 
@@ -25,10 +25,6 @@
 	compile 'com.lzy.widget:imagepicker:0.3.0'  //指定版本
 
 	compile 'com.lzy.widget:imagepicker:+'      //最新版本
-```
-或者使用
-```java
-    compile project(':imagepicker')
 ```
 
 ## 2.功能和参数含义
