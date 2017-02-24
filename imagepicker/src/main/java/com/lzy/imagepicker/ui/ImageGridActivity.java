@@ -19,7 +19,7 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.adapter.ImageFolderAdapter;
 import com.lzy.imagepicker.adapter.ImageGridAdapter;
-import com.lzy.imagepicker.bean.DataHolder;
+import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.view.FolderPopUpWindow;

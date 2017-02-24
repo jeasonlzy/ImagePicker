@@ -1,4 +1,4 @@
-package com.lzy.imagepicker.bean;
+package com.lzy.imagepicker;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * @author luoruiyi
+ * 使用弱引用，避免相册里大量图片引发问题
  */
 
 public class DataHolder {

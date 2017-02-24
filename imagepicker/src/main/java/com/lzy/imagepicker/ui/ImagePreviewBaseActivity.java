@@ -10,7 +10,7 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.Utils;
 import com.lzy.imagepicker.adapter.ImagePageAdapter;
-import com.lzy.imagepicker.bean.DataHolder;
+import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.view.ViewPagerFixed;
 
