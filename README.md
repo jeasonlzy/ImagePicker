@@ -2,8 +2,6 @@
 Android自定义相册，完全仿微信UI，实现了拍照、图片选择（单选/多选）、 裁剪 、旋转、等功能。
 
 ### 目前该项目原作者已经停止维护，改由[南尘](https://github.com/nanchen2251)进行维护。
-### 目前该项目原作者已经停止维护，改由[南尘](https://github.com/nanchen2251)进行维护。
-
 #### 现在已经支持7.0，请大家更新使用。
 #### 有问题请大家在issues(https://github.com/jeasonlzy/ImagePicker/issues) 提出，我会一一维护。
 #### 目前项目选择回来的图片暂时未做压缩，压缩可以到[https://github.com/nanchen2251/CompressHelper](https://github.com/nanchen2251/CompressHelper)
@@ -16,10 +14,18 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
 
 ### 联系方式
  * 原作者邮箱地址： liaojeason@126.com （建议大家加入下面的QQ群，原作者很忙。）
- * QQ群： 489873144 （建议使用QQ群，邮箱使用较少，可能看的不及时）
+ * QQ群： （1群，原作者是群主，还可以用OkGo哦）489873144   
+ （2群：118116509，南尘是群主，可能妹纸新手多一点） 
  * 本群旨在为使用我的github项目的人提供方便，如果遇到问题欢迎在群里提问。个人能力也有限，希望一起学习一起进步。
-
-
+ * [南尘博客园](http://www.cnblogs.com/liushilin/)  
+ * [南尘github](https://github.com/nanchen2251)
+ 
+### 更新日志
+V 0.3.5<br>
+ * [新增]提供直接调起相机的方式，并可直接设置牌照是否裁剪；
+ * [修复]Android7.0设备调系统相机直接崩溃的问题；
+ * [注意]如果出现 java.lang.RuntimeException: Unable to get provider android.support.v4.content.FileProvider: java.lang.SecurityException: Provider must not be exported，请直接clean再运行即可。
+ 
 ## 演示
  ![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo1.png)![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo2.gif)
  ![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo3.gif)![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo5.gif)
@@ -28,7 +34,7 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-	compile 'com.lzy.widget:imagepicker:0.3.4'  //指定版本
+	compile 'com.lzy.widget:imagepicker:0.3.5'  //指定版本
 
 	compile 'com.lzy.widget:imagepicker:+'      //最新版本
 ```
