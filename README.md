@@ -22,7 +22,7 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
  * [南尘github](https://github.com/nanchen2251)
  
 ### 更新日志
-V0.3.5<br>
+V 0.3.5<br>
  * [新增]提供直接调起相机的方式，并可直接设置牌照是否裁剪；
  * [修复]Android7.0设备调系统相机直接崩溃的问题；
  * [注意]如果出现 java.lang.RuntimeException: Unable to get provider android.support.v4.content.FileProvider: java.lang.SecurityException: Provider must not be exported，请直接clean再运行即可。
