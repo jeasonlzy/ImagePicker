@@ -97,16 +97,21 @@ public class WxDemoActivity extends AppCompatActivity implements ImagePickerAdap
             //添加图片返回
             if (data != null && requestCode == REQUEST_CODE_SELECT) {
                 ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                selImageList.addAll(images);
-                adapter.setImages(selImageList);
+                if (images != null){
+                    selImageList.addAll(images);
+                    adapter.setImages(selImageList);
+                }
+
             }
         } else if (resultCode == ImagePicker.RESULT_CODE_BACK) {
             //预览图片返回
             if (data != null && requestCode == REQUEST_CODE_PREVIEW) {
                 ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_IMAGE_ITEMS);
-                selImageList.clear();
-                selImageList.addAll(images);
-                adapter.setImages(selImageList);
+                if (images != null){
+                    selImageList.clear();
+                    selImageList.addAll(images);
+                    adapter.setImages(selImageList);
+                }
             }
         }
     }
