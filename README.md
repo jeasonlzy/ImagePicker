@@ -18,8 +18,7 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
  * 原作者邮箱地址： liaojeason@126.com （建议大家加入下面的QQ群，原作者很忙。）
  * QQ群： 489873144 （建议使用QQ群，邮箱使用较少，可能看的不及时）
  * 本群旨在为使用我的github项目的人提供方便，如果遇到问题欢迎在群里提问。个人能力也有限，希望一起学习一起进步。
-
-
+ * [南尘博客园](http://www.cnblogs.com/liushilin/)  [github](https://github.com/nanchen2251)
 ## 演示
  ![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo1.png)![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo2.gif)
  ![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo3.gif)![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo5.gif)
@@ -28,7 +27,7 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-	compile 'com.lzy.widget:imagepicker:0.3.4'  //指定版本
+	compile 'com.lzy.widget:imagepicker:0.3.5'  //指定版本
 
 	compile 'com.lzy.widget:imagepicker:+'      //最新版本
 ```
