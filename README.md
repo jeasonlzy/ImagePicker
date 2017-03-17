@@ -5,7 +5,8 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
 ### 目前该项目原作者已经停止维护，改由[南尘](https://github.com/nanchen2251)进行维护。
 
 #### 现在已经支持7.0，请大家更新使用。
-
+#### 有问题请大家在issues(https://github.com/jeasonlzy/ImagePicker/issues)提出，我会一一维护。
+#### 目前项目选择回来的图片暂时未做压缩，压缩可以到[https://github.com/nanchen2251/CompressHelper](https://github.com/nanchen2251/CompressHelper)
 该项目参考了：
 
 * [https://github.com/pengjianbo/GalleryFinal](https://github.com/pengjianbo/GalleryFinal) 
@@ -34,7 +35,7 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
 
 ## 2.功能和参数含义
 
-###温馨提示:目前库中的预览界面有个原图的复选框,暂时只做了UI,还没有做压缩的逻辑
+### 温馨提示:目前库中的预览界面有个原图的复选框,暂时只做了UI,还没有做压缩的逻辑
 
 <table>
   <tdead>
