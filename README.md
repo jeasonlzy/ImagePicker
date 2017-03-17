@@ -18,7 +18,15 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
  * 原作者邮箱地址： liaojeason@126.com （建议大家加入下面的QQ群，原作者很忙。）
  * QQ群： 489873144 （建议使用QQ群，邮箱使用较少，可能看的不及时）
  * 本群旨在为使用我的github项目的人提供方便，如果遇到问题欢迎在群里提问。个人能力也有限，希望一起学习一起进步。
- * [南尘博客园](http://www.cnblogs.com/liushilin/)  [github](https://github.com/nanchen2251)
+ * [南尘博客园](http://www.cnblogs.com/liushilin/)  
+ * [南尘github](https://github.com/nanchen2251)
+ 
+### 更新日志
+V0.3.5<br>
+ * [新增]提供直接调起相机的方式，并可直接设置牌照是否裁剪；
+ * [修复]Android7.0设备调系统相机直接崩溃的问题；
+ * [注意]如果出现 java.lang.RuntimeException: Unable to get provider android.support.v4.content.FileProvider: java.lang.SecurityException: Provider must not be exported，请直接clean再运行即可。
+ 
 ## 演示
  ![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo1.png)![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo2.gif)
  ![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo3.gif)![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo5.gif)
