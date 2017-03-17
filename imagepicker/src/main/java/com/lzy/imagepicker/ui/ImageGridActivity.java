@@ -4,12 +4,10 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ProviderInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -17,12 +15,12 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
+import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.ImageDataSource;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.adapter.ImageFolderAdapter;
 import com.lzy.imagepicker.adapter.ImageGridAdapter;
-import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.view.FolderPopUpWindow;
@@ -48,7 +46,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
 
     public static final int REQUEST_PERMISSION_STORAGE = 0x01;
     public static final int REQUEST_PERMISSION_CAMERA = 0x02;
-    public static final String EXTRAS_IS_CROP = "IS_CROP";
     public static final String EXTRAS_TAKE_PICKERS = "TAKE";
 
     private ImagePicker imagePicker;
@@ -63,7 +60,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     private FolderPopUpWindow mFolderPopupWindow;  //ImageSet的PopupWindow
     private List<ImageFolder> mImageFolders;   //所有的图片文件夹
     private ImageGridAdapter mImageGridAdapter;  //图片九宫格展示的适配器
-    private boolean isCrop = true; // 默认拍照需要裁剪
     private boolean directPhoto = false; // 默认不是直接调取相机
 
 
@@ -81,8 +77,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
 
         // 新增可直接拍照
         if (getIntent() != null && getIntent().getExtras() != null){
-            isCrop = getIntent().getBooleanExtra(EXTRAS_IS_CROP,true); // 默认直接拍照需要裁剪
-            imagePicker.setCrop(isCrop);
 
             directPhoto = getIntent().getBooleanExtra(EXTRAS_TAKE_PICKERS,false); // 默认不是直接打开相机
             if (directPhoto){
@@ -268,12 +262,12 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
                 //从拍照界面返回
                 //点击 X , 没有选择照片
                 if (data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS) == null) {
-                    //什么都不做
+                    //什么都不做 直接调起相机
                 } else {
                     //说明是从裁剪页面过来的数据，直接返回就可以
                     setResult(ImagePicker.RESULT_CODE_ITEMS, data);
-                    finish();
                 }
+                finish();
             }
         } else {
             //如果是裁剪，因为裁剪指定了存储的Uri，所以返回的data一定为null

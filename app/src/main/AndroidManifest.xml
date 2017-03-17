@@ -21,6 +21,7 @@
         <activity
             android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
             android:theme="@style/ImagePickerThemeFullScreen"/>
+
     </application>
 
 </manifest>
