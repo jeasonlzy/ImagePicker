@@ -77,7 +77,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
 
         // 新增可直接拍照
         if (getIntent() != null && getIntent().getExtras() != null){
-
             directPhoto = getIntent().getBooleanExtra(EXTRAS_TAKE_PICKERS,false); // 默认不是直接打开相机
             if (directPhoto){
                 if (!(checkPermission(Manifest.permission.CAMERA))) {
@@ -218,7 +217,10 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         if (imagePicker.isMultiMode()) {
             Intent intent = new Intent(ImageGridActivity.this, ImagePreviewActivity.class);
             intent.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
-            DataHolder.getInstance().save(DataHolder.DH_CURRENT_IMAGE_FOLDER_ITEMS, imagePicker.getCurrentImageFolderItems());
+            // 据说这样会导致大量图片的时候崩溃
+            intent.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, imagePicker.getCurrentImageFolderItems());
+            // 但采用弱引用会导致预览弱引用直接返回空指针
+//            DataHolder.getInstance().save(DataHolder.DH_CURRENT_IMAGE_FOLDER_ITEMS, imagePicker.getCurrentImageFolderItems());
             intent.putExtra(ImagePreviewActivity.ISORIGIN, isOrigin);
             startActivityForResult(intent, ImagePicker.REQUEST_CODE_PREVIEW);  //如果是多选，点击图片进入预览界面
         } else {
