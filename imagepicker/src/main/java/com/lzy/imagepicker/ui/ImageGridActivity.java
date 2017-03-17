@@ -1,12 +1,15 @@
 package com.lzy.imagepicker.ui;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -33,12 +36,20 @@ import java.util.List;
  * 创建日期：2016/5/19
  * 描    述：
  * 修订历史：
+ *
+ * 2017-03-17
+ * @author nanchen
+ * 新增可直接传递是否裁剪参数，以及直接拍照
+ *
+ *
  * ================================================
  */
 public class ImageGridActivity extends ImageBaseActivity implements ImageDataSource.OnImagesLoadedListener, ImageGridAdapter.OnImageItemClickListener, ImagePicker.OnImageSelectedListener, View.OnClickListener {
 
     public static final int REQUEST_PERMISSION_STORAGE = 0x01;
     public static final int REQUEST_PERMISSION_CAMERA = 0x02;
+    public static final String EXTRAS_IS_CROP = "IS_CROP";
+    public static final String EXTRAS_TAKE_PICKERS = "TAKE";
 
     private ImagePicker imagePicker;
 
@@ -52,6 +63,11 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     private FolderPopUpWindow mFolderPopupWindow;  //ImageSet的PopupWindow
     private List<ImageFolder> mImageFolders;   //所有的图片文件夹
     private ImageGridAdapter mImageGridAdapter;  //图片九宫格展示的适配器
+    private boolean isCrop = true; // 默认拍照需要裁剪
+    private boolean directPhoto = false; // 默认不是直接调取相机
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +77,22 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         imagePicker = ImagePicker.getInstance();
         imagePicker.clear();
         imagePicker.addOnImageSelectedListener(this);
+
+
+        // 新增可直接拍照
+        if (getIntent() != null && getIntent().getExtras() != null){
+            isCrop = getIntent().getBooleanExtra(EXTRAS_IS_CROP,true); // 默认直接拍照需要裁剪
+            imagePicker.setCrop(isCrop);
+
+            directPhoto = getIntent().getBooleanExtra(EXTRAS_TAKE_PICKERS,false); // 默认不是直接打开相机
+            if (directPhoto){
+                if (!(checkPermission(Manifest.permission.CAMERA))) {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, ImageGridActivity.REQUEST_PERMISSION_CAMERA);
+                } else {
+                    imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
+                }
+            }
+        }
 
         findViewById(R.id.btn_back).setOnClickListener(this);
         mBtnOk = (Button) findViewById(R.id.btn_ok);
@@ -210,6 +242,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         }
     }
 
+    @SuppressLint("StringFormatMatches")
     @Override
     public void onImageSelected(int position, ImageItem item, boolean isAdd) {
         if (imagePicker.getSelectImageCount() > 0) {

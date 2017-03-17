@@ -78,6 +78,14 @@ public class WxDemoActivity extends AppCompatActivity implements ImagePickerAdap
                 //打开选择,本次允许选择的数量
                 ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
                 Intent intent = new Intent(this, ImageGridActivity.class);
+
+
+                /**
+                 * 下面两行有需要的可以添加
+                 */
+
+//                intent.putExtra(ImageGridActivity.EXTRAS_IS_CROP,false);  // 拍照的是否需要裁剪，默认需要
+//                intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
                 startActivityForResult(intent, REQUEST_CODE_SELECT);
                 break;
             default:

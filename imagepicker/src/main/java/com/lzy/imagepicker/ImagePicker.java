@@ -258,7 +258,7 @@ public class ImagePicker {
                  * 7.0 调用系统相机拍照不再允许使用Uri方式，应该替换为FileProvider
                  * 并且这样可以解决MIUI系统上拍照返回size为0的情况
                  */
-                Uri uri = FileProvider.getUriForFile(activity,BuildConfig.APPLICATION_ID + ".provider", takeImageFile);
+                Uri uri = FileProvider.getUriForFile(activity,"com.lzy.imagepicker.provider", takeImageFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
             }
         }

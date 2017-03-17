@@ -30,6 +30,7 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
     compile 'com.lzy.widget:view-core:0.2.1'
-    compile 'com.lzy.widget:imagepicker:0.3.4'
+
+    compile 'com.lzy.widget:imagepicker:0.3.5'
 //    compile project(':imagepicker')
 }
