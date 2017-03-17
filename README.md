@@ -1,8 +1,8 @@
 # ImagePicker
 Android自定义相册，完全仿微信UI，实现了拍照、图片选择（单选/多选）、 裁剪 、旋转、等功能。
 
-### 目前该项目原作者已经停止维护，改由[南尘]（https://github.com/nanchen2251)进行维护。
-### 目前该项目原作者已经停止维护，改由[南尘]（https://github.com/nanchen2251)进行维护。
+### 目前该项目原作者已经停止维护，改由[南尘](https://github.com/nanchen2251)进行维护。
+### 目前该项目原作者已经停止维护，改由[南尘](https://github.com/nanchen2251)进行维护。
 
 #### 现在已经支持7.0，请大家更新使用。
 
