@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
-import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.ImageDataSource;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
@@ -289,6 +288,9 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
                     setResult(ImagePicker.RESULT_CODE_ITEMS, intent);   //单选不需要裁剪，返回数据
                     finish();
                 }
+            }
+            if (directPhoto){
+                finish();
             }
         }
     }

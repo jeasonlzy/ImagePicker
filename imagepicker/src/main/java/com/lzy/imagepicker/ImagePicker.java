@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
@@ -251,14 +253,18 @@ public class ImagePicker {
                 // 可以通过dat extra能够得到原始图片位置。即，如果指定了目标uri，data就没有数据，
                 // 如果没有指定uri，则data就返回有数据！
 
-//                Uri uri = Uri.fromFile(takeImageFile);
+                Uri uri;
 
+                if (VERSION.SDK_INT <= VERSION_CODES.M){
+                    uri = Uri.fromFile(takeImageFile);
+                }else{
+                    /**
+                     * 7.0 调用系统相机拍照不再允许使用Uri方式，应该替换为FileProvider
+                     * 并且这样可以解决MIUI系统上拍照返回size为0的情况
+                     */
+                    uri = FileProvider.getUriForFile(activity,"com.lzy.imagepicker.provider", takeImageFile);
+                }
 
-                /**
-                 * 7.0 调用系统相机拍照不再允许使用Uri方式，应该替换为FileProvider
-                 * 并且这样可以解决MIUI系统上拍照返回size为0的情况
-                 */
-                Uri uri = FileProvider.getUriForFile(activity,"com.lzy.imagepicker.provider", takeImageFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
             }
         }
