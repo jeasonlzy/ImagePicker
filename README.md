@@ -160,7 +160,14 @@ V 0.3.5<br>
         }
     }
 ```
-### 3.重写`onActivityResult`方法,回调结果
+
+### 3.如果你想直接调用相机
+```java
+	Intent intent = new Intent(this, ImageGridActivity.class);
+	intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
+        startActivityForResult(intent, REQUEST_CODE_SELECT);
+```
+### 4.重写`onActivityResult`方法,回调结果
 ```java
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -176,3 +183,5 @@ V 0.3.5<br>
         }
     }
 ```
+
+##更多使用，请下载demo参看源代码
