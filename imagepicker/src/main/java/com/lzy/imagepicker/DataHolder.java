@@ -37,11 +37,19 @@ public class DataHolder {
     }
 
     public void save(String id, List<ImageItem> object) {
-        data.put(id, new WeakReference<>(object));
+        if (data != null){
+            data.put(id, new WeakReference<>(object));
+        }
     }
 
     public Object retrieve(String id) {
+        if (data == null || mInstance == null){
+            throw new RuntimeException("你必须先初始化");
+        }
         WeakReference<List<ImageItem>> objectWeakReference = data.get(id);
+        if (objectWeakReference == null){
+            throw new RuntimeException("相册数据弱引用为空！请检查！");
+        }
         return objectWeakReference.get();
     }
 }

@@ -44,7 +44,7 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
         setContentView(R.layout.activity_image_preview);
 
         mCurrentPosition = getIntent().getIntExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, 0);
-        isFromItems = getIntent().getBooleanExtra(ImagePicker.EXTAR_FROM_ITEMS,false);
+        isFromItems = getIntent().getBooleanExtra(ImagePicker.EXTRA_FROM_ITEMS,false);
 
         if (isFromItems){
             // 据说这样会导致大量图片崩溃

@@ -80,9 +80,8 @@ public class WxDemoActivity extends AppCompatActivity implements ImagePickerAdap
                 Intent intent = new Intent(this, ImageGridActivity.class);
 
                 /**
-                 * 下面两行有需要的可以添加
+                 * 下面一行有需要的可以添加
                  */
-
 //                intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
                 startActivityForResult(intent, REQUEST_CODE_SELECT);
                 break;
@@ -91,7 +90,7 @@ public class WxDemoActivity extends AppCompatActivity implements ImagePickerAdap
                 Intent intentPreview = new Intent(this, ImagePreviewDelActivity.class);
                 intentPreview.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, (ArrayList<ImageItem>) adapter.getImages());
                 intentPreview.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
-                intentPreview.putExtra(ImagePicker.EXTAR_FROM_ITEMS,true);
+                intentPreview.putExtra(ImagePicker.EXTRA_FROM_ITEMS,true);
                 startActivityForResult(intentPreview, REQUEST_CODE_PREVIEW);
                 break;
         }
@@ -108,7 +107,6 @@ public class WxDemoActivity extends AppCompatActivity implements ImagePickerAdap
                     selImageList.addAll(images);
                     adapter.setImages(selImageList);
                 }
-
             }
         } else if (resultCode == ImagePicker.RESULT_CODE_BACK) {
             //预览图片返回

@@ -48,7 +48,7 @@ public class ImagePicker {
     public static final String EXTRA_RESULT_ITEMS = "extra_result_items";
     public static final String EXTRA_SELECTED_IMAGE_POSITION = "selected_image_position";
     public static final String EXTRA_IMAGE_ITEMS = "extra_image_items";
-    public static final String EXTAR_FROM_ITEMS = "extra_from_items";
+    public static final String EXTRA_FROM_ITEMS = "extra_from_items";
 
     private boolean multiMode = true;    //图片选择模式
     private int selectLimit = 9;         //最大选择图片数量
@@ -319,4 +319,5 @@ public class ImagePicker {
             l.onImageSelected(position, item, isAdd);
         }
     }
+
 }
