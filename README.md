@@ -5,6 +5,7 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
 #### 现在已经支持7.0，请大家更新使用。
 #### 有问题请大家在issues(https://github.com/jeasonlzy/ImagePicker/issues) 提出，我会一一维护。
 #### 目前项目选择回来的图片暂时未做压缩，压缩可以到[https://github.com/nanchen2251/CompressHelper](https://github.com/nanchen2251/CompressHelper)
+#### 项目编译版本为SDK为25，Tools为25.0.2，如果导入版本和你的主工程不符而导致运行崩溃，请修改你的主工程版本到更高，或者直接import该module。
 该项目参考了：
 
 * [https://github.com/pengjianbo/GalleryFinal](https://github.com/pengjianbo/GalleryFinal) 
@@ -19,6 +20,8 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
  * 本群旨在为使用我的github项目的人提供方便，如果遇到问题欢迎在群里提问。个人能力也有限，希望一起学习一起进步。
  * [南尘博客园](http://www.cnblogs.com/liushilin/)  
  * [南尘github](https://github.com/nanchen2251)
+ 
+ 
  
 ### 更新日志
 V 0.4.4<br>
@@ -114,7 +117,7 @@ V 0.3.5<br>
         @Override
         public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
             Picasso.with(activity)//
-                    .load(new File(path))//
+                    .load(BitmapUtil.getRotatedUri(activity,path))//
                     .placeholder(R.mipmap.default_image)//
                     .error(R.mipmap.default_image)//
                     .resize(width, height)//
