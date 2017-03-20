@@ -30,6 +30,10 @@ import java.util.Locale;
  * 创建日期：2016/5/19
  * 描    述：图片选择的入口类
  * 修订历史：
+ *
+ * 2017-03-20
+ * @author nanchen
+ * 采用单例和弱引用解决Intent传值限制导致的异常
  * ================================================
  */
 public class ImagePicker {
@@ -44,6 +48,7 @@ public class ImagePicker {
     public static final String EXTRA_RESULT_ITEMS = "extra_result_items";
     public static final String EXTRA_SELECTED_IMAGE_POSITION = "selected_image_position";
     public static final String EXTRA_IMAGE_ITEMS = "extra_image_items";
+    public static final String EXTAR_FROM_ITEMS = "extra_from_items";
 
     private boolean multiMode = true;    //图片选择模式
     private int selectLimit = 9;         //最大选择图片数量

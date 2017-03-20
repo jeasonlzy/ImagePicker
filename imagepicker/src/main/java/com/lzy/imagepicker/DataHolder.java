@@ -1,35 +1,47 @@
 package com.lzy.imagepicker;
 
+import com.lzy.imagepicker.bean.ImageItem;
+
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-/**
- * @author luoruiyi
- * 使用弱引用，避免相册里大量图片引发问题
- */
 
+/**
+ * 新的DataHolder，使用单例和弱引用解决崩溃问题
+ * <p>
+ * Author: nanchen
+ * Email: liushilin520@foxmail.com
+ * Date: 2017-03-20  07:01
+ */
 public class DataHolder {
     public static final String DH_CURRENT_IMAGE_FOLDER_ITEMS = "dh_current_image_folder_items";
 
-    private static final DataHolder ourInstance = new DataHolder();
+    private static DataHolder mInstance;
+    private Map<String, WeakReference<List<ImageItem>>> data;
 
     public static DataHolder getInstance() {
-        return ourInstance;
+        if (mInstance == null){
+            synchronized (DataHolder.class){
+                if (mInstance == null){
+                    mInstance = new DataHolder();
+                }
+            }
+        }
+        return mInstance;
     }
 
     private DataHolder() {
+        data = new HashMap<>();
     }
 
-
-    Map<String, WeakReference<Object>> data = new HashMap<String, WeakReference<Object>>();
-
-    public void save(String id, Object object) {
-        data.put(id, new WeakReference<Object>(object));
+    public void save(String id, List<ImageItem> object) {
+        data.put(id, new WeakReference<>(object));
     }
 
     public Object retrieve(String id) {
-        WeakReference<Object> objectWeakReference = data.get(id);
+        WeakReference<List<ImageItem>> objectWeakReference = data.get(id);
         return objectWeakReference.get();
     }
 }

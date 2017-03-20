@@ -36,6 +36,7 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
     protected View topBar;
     protected ViewPagerFixed mViewPager;
     protected ImagePageAdapter mAdapter;
+    protected boolean isFromItems = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +44,16 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
         setContentView(R.layout.activity_image_preview);
 
         mCurrentPosition = getIntent().getIntExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, 0);
+        isFromItems = getIntent().getBooleanExtra(ImagePicker.EXTAR_FROM_ITEMS,false);
 
-        // 据说这样会导致大量图片崩溃
+        if (isFromItems){
+            // 据说这样会导致大量图片崩溃
         mImageItems = (ArrayList<ImageItem>) getIntent().getSerializableExtra(ImagePicker.EXTRA_IMAGE_ITEMS);
+        }else{
+            // 下面采用弱引用会导致预览崩溃
+            mImageItems =  (ArrayList<ImageItem>) DataHolder.getInstance().retrieve(DataHolder.DH_CURRENT_IMAGE_FOLDER_ITEMS);
+        }
 
-        // 下面采用弱引用会导致预览崩溃
-//        mImageItems =  (ArrayList<ImageItem>) DataHolder.getInstance().retrieve(DataHolder.DH_CURRENT_IMAGE_FOLDER_ITEMS);
 
         imagePicker = ImagePicker.getInstance();
         selectedImages = imagePicker.getSelectedImages();
