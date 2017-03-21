@@ -116,7 +116,7 @@ V 0.3.5<br>
         @Override
         public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
             Picasso.with(activity)//
-                    .load(BitmapUtil.getRotatedUri(activity,path))//
+                    .load(Uri.fromFile(new File(path)))//
                     .placeholder(R.mipmap.default_image)//
                     .error(R.mipmap.default_image)//
                     .resize(width, height)//
