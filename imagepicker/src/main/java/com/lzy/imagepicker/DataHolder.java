@@ -2,7 +2,6 @@ package com.lzy.imagepicker;
 
 import com.lzy.imagepicker.bean.ImageItem;
 
-import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,7 @@ public class DataHolder {
     public static final String DH_CURRENT_IMAGE_FOLDER_ITEMS = "dh_current_image_folder_items";
 
     private static DataHolder mInstance;
-    private Map<String, WeakReference<List<ImageItem>>> data;
+    private Map<String, List<ImageItem>> data;
 
     public static DataHolder getInstance() {
         if (mInstance == null){
@@ -38,7 +37,7 @@ public class DataHolder {
 
     public void save(String id, List<ImageItem> object) {
         if (data != null){
-            data.put(id, new WeakReference<>(object));
+            data.put(id, object);
         }
     }
 
@@ -46,10 +45,10 @@ public class DataHolder {
         if (data == null || mInstance == null){
             throw new RuntimeException("你必须先初始化");
         }
-        WeakReference<List<ImageItem>> objectWeakReference = data.get(id);
+        List<ImageItem> objectWeakReference = data.get(id);
         if (objectWeakReference == null){
             throw new RuntimeException("相册数据弱引用为空！请检查！");
         }
-        return objectWeakReference.get();
+        return objectWeakReference;
     }
 }
