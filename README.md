@@ -46,7 +46,7 @@ V 0.3.5<br>
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-	compile 'com.lzy.widget:imagepicker:0.4.4'  //指定版本
+	compile 'com.lzy.widget:imagepicker:0.4.5'  //指定版本
 
 	compile 'com.lzy.widget:imagepicker:+'      //最新版本（建议不使用该方法，因为有可能会导致新旧版本不兼容）
 ```
