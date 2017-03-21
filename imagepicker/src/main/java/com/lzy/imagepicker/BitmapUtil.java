@@ -91,4 +91,17 @@ public class BitmapUtil {
             return Uri.fromFile(new File(path));
         }
     }
+
+    /**
+     * 将图片按照指定的角度进行旋转
+     *
+     * @param path   需要旋转的图片的路径
+     * @param degree 指定的旋转角度
+     * @return 旋转后的图片
+     */
+    public static Bitmap rotateBitmapByDegree(String path, int degree) {
+        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        return rotateBitmapByDegree(bitmap,degree);
+    }
+
 }

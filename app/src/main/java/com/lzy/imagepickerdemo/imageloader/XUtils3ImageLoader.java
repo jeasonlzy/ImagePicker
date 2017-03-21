@@ -12,14 +12,16 @@ package com.lzy.imagepickerdemo.imageloader;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.widget.ImageView;
 
-import com.lzy.imagepicker.BitmapUtil;
 import com.lzy.imagepicker.loader.ImageLoader;
 import com.lzy.imagepickerdemo.R;
 
 import org.xutils.image.ImageOptions;
 import org.xutils.x;
+
+import java.io.File;
 
 public class XUtils3ImageLoader implements ImageLoader {
     @Override
@@ -32,7 +34,7 @@ public class XUtils3ImageLoader implements ImageLoader {
                 .setCrop(false)//
                 .setUseMemCache(true)//
                 .build();
-        x.image().bind(imageView, BitmapUtil.getRotatedUri(activity,path).toString(), options);
+        x.image().bind(imageView, Uri.fromFile(new File(path)).toString(), options);
     }
 
     @Override
