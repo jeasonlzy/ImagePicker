@@ -45,10 +45,6 @@ public class DataHolder {
         if (data == null || mInstance == null){
             throw new RuntimeException("你必须先初始化");
         }
-        List<ImageItem> objectWeakReference = data.get(id);
-        if (objectWeakReference == null){
-            throw new RuntimeException("相册数据弱引用为空！请检查！");
-        }
-        return objectWeakReference;
+        return data.get(id);
     }
 }
