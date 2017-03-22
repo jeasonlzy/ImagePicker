@@ -53,7 +53,7 @@ public class WxDemoActivity extends AppCompatActivity implements ImagePickerAdap
         ImagePicker imagePicker = ImagePicker.getInstance();
         imagePicker.setImageLoader(new GlideImageLoader());   //设置图片加载器
         imagePicker.setShowCamera(true);                      //显示拍照按钮
-        imagePicker.setCrop(false);                           //允许裁剪（单选才有效）
+        imagePicker.setCrop(true);                           //允许裁剪（单选才有效）
         imagePicker.setSaveRectangle(true);                   //是否按矩形区域保存
         imagePicker.setSelectLimit(maxImgCount);              //选中数量限制
         imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
@@ -96,6 +96,13 @@ public class WxDemoActivity extends AppCompatActivity implements ImagePickerAdap
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         switch (position) {
                             case 0: // 直接调起相机
+                                /**
+                                 * 0.4.7 目前直接调起相机不支持裁剪，如果开启裁剪后不会返回图片，请注意，后续版本会解决
+                                 *
+                                 * 但是当前直接依赖的版本已经解决，考虑到版本改动很少，所以这次没有上传到远程仓库
+                                 *
+                                 * 如果实在有所需要，请直接下载源码引用。
+                                 */
                                 //打开选择,本次允许选择的数量
                                 ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
                                 Intent intent = new Intent(WxDemoActivity.this, ImageGridActivity.class);
