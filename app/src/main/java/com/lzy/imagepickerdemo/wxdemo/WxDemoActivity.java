@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -13,9 +14,11 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.ui.ImagePreviewDelActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.lzy.imagepickerdemo.R;
+import com.lzy.imagepickerdemo.SelectDialog;
 import com.lzy.imagepickerdemo.imageloader.GlideImageLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ================================================
@@ -71,19 +74,48 @@ public class WxDemoActivity extends AppCompatActivity implements ImagePickerAdap
         recyclerView.setAdapter(adapter);
     }
 
+    private SelectDialog showDialog(SelectDialog.SelectDialogListener listener, List<String> names) {
+        SelectDialog dialog = new SelectDialog(this, R.style
+                .transparentFrameWindowStyle,
+                listener, names);
+        if (!this.isFinishing()) {
+            dialog.show();
+        }
+        return dialog;
+    }
+
     @Override
     public void onItemClick(View view, int position) {
         switch (position) {
             case IMAGE_ITEM_ADD:
-                //打开选择,本次允许选择的数量
-                ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
-                Intent intent = new Intent(this, ImageGridActivity.class);
+                List<String> names = new ArrayList<>();
+                names.add("拍照");
+                names.add("相册");
+                showDialog(new SelectDialog.SelectDialogListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        switch (position) {
+                            case 0: // 直接调起相机
+                                //打开选择,本次允许选择的数量
+                                ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
+                                Intent intent = new Intent(WxDemoActivity.this, ImageGridActivity.class);
+                                intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
+                                startActivityForResult(intent, REQUEST_CODE_SELECT);
+                                break;
+                            case 1:
+                                //打开选择,本次允许选择的数量
+                                ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
+                                Intent intent1 = new Intent(WxDemoActivity.this, ImageGridActivity.class);
+                                startActivityForResult(intent1, REQUEST_CODE_SELECT);
+                                break;
+                            default:
+                                break;
+                        }
 
-                /**
-                 * 下面一行有需要的可以添加
-                 */
-//                intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
-                startActivityForResult(intent, REQUEST_CODE_SELECT);
+                    }
+                }, names);
+
+
                 break;
             default:
                 //打开预览
