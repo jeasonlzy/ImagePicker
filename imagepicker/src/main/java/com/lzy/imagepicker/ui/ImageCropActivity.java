@@ -8,8 +8,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.lzy.imagepicker.util.BitmapUtil;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -73,7 +73,9 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
         options.inSampleSize = calculateInSampleSize(options, displayMetrics.widthPixels, displayMetrics.heightPixels);
         options.inJustDecodeBounds = false;
         mBitmap = BitmapFactory.decodeFile(imagePath, options);
-        mCropImageView.setImageBitmap(mBitmap);
+//        mCropImageView.setImageBitmap(mBitmap);
+        //设置默认旋转角度
+        mCropImageView.setImageBitmap(mCropImageView.rotate(mBitmap, BitmapUtil.getBitmapDegree(imagePath)));
 
 //        mCropImageView.setImageURI(Uri.fromFile(new File(imagePath)));
     }

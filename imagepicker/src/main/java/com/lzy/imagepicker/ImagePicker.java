@@ -10,10 +10,13 @@ import android.os.Build.VERSION_CODES;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 
 import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.loader.ImageLoader;
+import com.lzy.imagepicker.util.ProviderUtil;
+import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.view.CropImageView;
 
 import java.io.File;
@@ -267,9 +270,10 @@ public class ImagePicker {
                      * 7.0 调用系统相机拍照不再允许使用Uri方式，应该替换为FileProvider
                      * 并且这样可以解决MIUI系统上拍照返回size为0的情况
                      */
-                    uri = FileProvider.getUriForFile(activity,"com.lzy.imagepicker.provider", takeImageFile);
+                    uri = FileProvider.getUriForFile(activity, ProviderUtil.getFileProviderName(activity), takeImageFile);
                 }
 
+                Log.e("nanchen",ProviderUtil.getFileProviderName(activity));
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
             }
         }

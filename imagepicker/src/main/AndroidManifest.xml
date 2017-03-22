@@ -29,7 +29,7 @@
             android:theme="@style/ImagePickerThemeFullScreen"/>
 
         <provider
-            android:authorities="com.lzy.imagepicker.provider"
+            android:authorities="${applicationId}.provider"
             android:name=".ImagePickerProvider"
             android:exported="false"
             android:grantUriPermissions="true">

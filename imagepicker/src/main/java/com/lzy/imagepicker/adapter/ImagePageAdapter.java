@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.Utils;
+import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.bean.ImageItem;
 
 import java.util.ArrayList;

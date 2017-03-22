@@ -1,4 +1,4 @@
-package com.lzy.imagepicker;
+package com.lzy.imagepicker.util;
 
 import android.app.Activity;
 import android.graphics.Bitmap;

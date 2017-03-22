@@ -16,7 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
-import com.lzy.imagepicker.BitmapUtil;
+import com.lzy.imagepicker.util.BitmapUtil;
 import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.ImageDataSource;
 import com.lzy.imagepicker.ImagePicker;
