@@ -26,31 +26,31 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
 ### 更新日志
 
 V 0.5.1<br>
- * [更正]由于原图功能其实还没有做，所以本版本隐去了原图的显示。以免用户误解原图问题。
- * [修复]使用RecyclerView替换GridView解决改变选中状态全局刷新的问题；
- * [提示]虽然本次解决了全局刷新，但是如果使用的是Picasso依然会出现重新加载一张图片的问题，这是Picasso自己的问题，建议使用Glide框架。
+ * [更正] 由于原图功能其实还没有做，所以本版本隐去了原图的显示。以免用户误解原图问题。
+ * [修复] 使用RecyclerView替换GridView解决改变选中状态全局刷新的问题；
+ * [提示] 虽然本次解决了全局刷新，但是如果使用的是Picasso依然会出现重新加载一张图片的问题，这是Picasso自己的问题，建议使用Glide框架。
  
  
 V 0.5.0<br>
- * [修复]解决provider冲突问题； 
+ * [修复] 解决provider冲突问题； 
 
 V 0.4.8<br>
- * [修复]解决demo中直接呼起相机并裁剪不会返回数据的bug，不需要这个功能的可以不更新;
+ * [修复] 解决demo中直接呼起相机并裁剪不会返回数据的bug，不需要这个功能的可以不更新;
  
  
 V 0.4.7<br>
- * [新增]新增可直接调起相机的功能;
- * [修复]解决可能和主项目provider冲突的潜在问题；
- * [修复]点击图片预览空指针崩溃问题；
- * [修复]使用Intent传值限制导致的崩溃问题;
- * [修复]部分机型拍照后图片旋转问题；
- * [修复]更改选择框图片背景为灰色，以免白色图看不清。
+ * [新增] 新增可直接调起相机的功能;
+ * [修复] 解决可能和主项目provider冲突的潜在问题；
+ * [修复] 点击图片预览空指针崩溃问题；
+ * [修复] 使用Intent传值限制导致的崩溃问题;
+ * [修复] 部分机型拍照后图片旋转问题；
+ * [修复] 更改选择框图片背景为灰色，以免白色图看不清。
  
  
 V 0.3.5<br>
- * [新增]提供直接调起相机的方式，并可直接设置牌照是否裁剪；
- * [修复]Android7.0设备调系统相机直接崩溃的问题；
- * [注意]如果出现 java.lang.RuntimeException: Unable to get provider android.support.v4.content.FileProvider: java.lang.SecurityException: Provider must not be exported，请直接clean再运行即可。
+ * [新增] 提供直接调起相机的方式，并可直接设置牌照是否裁剪；
+ * [修复] Android7.0设备调系统相机直接崩溃的问题；
+ * [注意] 如果出现 java.lang.RuntimeException: Unable to get provider android.support.v4.content.FileProvider: java.lang.SecurityException: Provider must not be exported，请直接clean再运行即可。
  
 ## 演示
  ![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo1.png)![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo2.gif)
