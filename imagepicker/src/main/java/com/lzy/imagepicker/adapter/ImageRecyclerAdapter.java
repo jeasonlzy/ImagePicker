@@ -27,7 +27,9 @@ import java.util.ArrayList;
  *
  * 用于替换原项目的GridView，使用局部刷新解决选中照片出现闪动问题
  *
- * 替换为RecyclerView后并没有通过局部刷新解决，可能是picasso图片加载框架的问题
+ * 替换为RecyclerView后只是不再会导致全局刷新，
+ *
+ * 但还是会出现明显的重新加载图片，可能是picasso图片加载框架的问题
  *
  * Author: nanchen
  * Email: liushilin520@foxmail.com
