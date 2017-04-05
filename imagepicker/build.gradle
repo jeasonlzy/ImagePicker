@@ -19,9 +19,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
+    compile 'com.android.support:recyclerview-v7:25.1.1'
 }
 
 //apply from: '../bintray.gradle'

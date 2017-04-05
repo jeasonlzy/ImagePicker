@@ -262,7 +262,6 @@ public class ImagePicker {
                 // 如果没有指定uri，则data就返回有数据！
 
                 Uri uri;
-
                 if (VERSION.SDK_INT <= VERSION_CODES.M){
                     uri = Uri.fromFile(takeImageFile);
                 }else{
