@@ -3,6 +3,8 @@ package com.lzy.imagepicker;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build.VERSION;
@@ -265,11 +267,22 @@ public class ImagePicker {
                 if (VERSION.SDK_INT <= VERSION_CODES.M){
                     uri = Uri.fromFile(takeImageFile);
                 }else{
+
+
+
                     /**
                      * 7.0 调用系统相机拍照不再允许使用Uri方式，应该替换为FileProvider
                      * 并且这样可以解决MIUI系统上拍照返回size为0的情况
                      */
                     uri = FileProvider.getUriForFile(activity, ProviderUtil.getFileProviderName(activity), takeImageFile);
+                    //加入uri权限 要不三星手机不能拍照
+                    List<ResolveInfo> resInfoList = activity.getPackageManager().queryIntentActivities
+                            (takePictureIntent, PackageManager.MATCH_DEFAULT_ONLY);
+                    for (ResolveInfo resolveInfo : resInfoList) {
+                        String packageName = resolveInfo.activityInfo.packageName;
+                        activity.grantUriPermission(packageName, uri, Intent
+                                .FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    }
                 }
 
                 Log.e("nanchen",ProviderUtil.getFileProviderName(activity));
