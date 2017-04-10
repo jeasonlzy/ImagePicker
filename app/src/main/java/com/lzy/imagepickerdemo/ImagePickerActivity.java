@@ -155,6 +155,8 @@ public class ImagePickerActivity extends AppCompatActivity implements SeekBar.On
                 imagePicker.setOutPutY(Integer.valueOf(et_outputy.getText().toString()));
 
                 Intent intent = new Intent(this, ImageGridActivity.class);
+                intent.putExtra(ImageGridActivity.EXTRAS_IMAGES,images);
+                //ImagePicker.getInstance().setSelectedImages(images);
                 startActivityForResult(intent, 100);
                 break;
             case R.id.btn_wxDemo:
@@ -192,12 +194,14 @@ public class ImagePickerActivity extends AppCompatActivity implements SeekBar.On
     public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
+
+    ArrayList<ImageItem> images = null;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
             if (data != null && requestCode == 100) {
-                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 MyAdapter adapter = new MyAdapter(images);
                 gridView.setAdapter(adapter);
             } else {

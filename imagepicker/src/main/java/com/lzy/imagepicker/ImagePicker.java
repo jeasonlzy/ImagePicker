@@ -317,6 +317,13 @@ public class ImagePicker {
         notifyImageSelectedChanged(position, item, isAdd);
     }
 
+    public void setSelectedImages(ArrayList<ImageItem> selectedImages) {
+        if (selectedImages == null) {
+            return;
+        }
+        this.mSelectedImages = selectedImages;
+    }
+
     private void notifyImageSelectedChanged(int position, ImageItem item, boolean isAdd) {
         if (mImageSelectedListeners == null) return;
         for (OnImageSelectedListener l : mImageSelectedListeners) {
