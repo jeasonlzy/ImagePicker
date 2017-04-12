@@ -145,7 +145,14 @@ V 0.3.5<br>
         }
     }
 ```
-### 1.然后配置图片选择器，一般在Application初始化配置一次就可以,这里就需要将上面的图片加载器设置进来,其余的配置根据需要设置
+
+### 1.在你的AndroidManifest.xml文件里面添加下面的
+```java
+<activity
+            android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
+            android:theme="@style/ImagePickerThemeFullScreen"/>
+```
+### 2.然后配置图片选择器，一般在Application初始化配置一次就可以,这里就需要将上面的图片加载器设置进来,其余的配置根据需要设置
 ```java
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,7 +171,7 @@ V 0.3.5<br>
         imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
 	}
 ```
-### 2.以上配置完成后，在适当的方法中开启相册，例如点击按钮时
+### 3.以上配置完成后，在适当的方法中开启相册，例如点击按钮时
 ```java
 	public void onClick(View v) {
             Intent intent = new Intent(this, ImageGridActivity.class);
@@ -173,13 +180,13 @@ V 0.3.5<br>
     }
 ```
 
-### 3.如果你想直接调用相机
+### 4.如果你想直接调用相机
 ```java
 	Intent intent = new Intent(this, ImageGridActivity.class);
 	intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
         startActivityForResult(intent, REQUEST_CODE_SELECT);
 ```
-### 4.重写`onActivityResult`方法,回调结果
+### 5.重写`onActivityResult`方法,回调结果
 ```java
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
