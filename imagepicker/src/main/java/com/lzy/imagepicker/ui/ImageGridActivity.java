@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,12 +26,8 @@ import com.lzy.imagepicker.adapter.ImageRecyclerAdapter;
 import com.lzy.imagepicker.adapter.ImageRecyclerAdapter.OnImageItemClickListener;
 import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
-import com.lzy.imagepicker.util.BitmapUtil;
 import com.lzy.imagepicker.view.FolderPopUpWindow;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -313,21 +308,21 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
                  * 2017-03-21 对机型做旋转处理
                  */
                 String path = imagePicker.getTakeImageFile().getAbsolutePath();
-                int degree = BitmapUtil.getBitmapDegree(path);
-                if (degree != 0){
-                    Bitmap bitmap = BitmapUtil.rotateBitmapByDegree(path,degree);
-                    if (bitmap != null){
-                        File file = new File(path);
-                        try {
-                            FileOutputStream bos = new FileOutputStream(file);
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-                            bos.flush();
-                            bos.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+//                int degree = BitmapUtil.getBitmapDegree(path);
+//                if (degree != 0){
+//                    Bitmap bitmap = BitmapUtil.rotateBitmapByDegree(path,degree);
+//                    if (bitmap != null){
+//                        File file = new File(path);
+//                        try {
+//                            FileOutputStream bos = new FileOutputStream(file);
+//                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+//                            bos.flush();
+//                            bos.close();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
 
                 ImageItem imageItem = new ImageItem();
                 imageItem.path = path;
