@@ -25,6 +25,10 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
  
 ### 更新日志
 
+V 0.5.2<br>
+ * [修复]矫正图片旋转导致的oom；
+ * [修复]部分手机TitleBar和状态栏重复的问题；
+
 V 0.5.1<br>
  * [更正] 由于原图功能其实还没有做，所以本版本隐去了原图的显示。以免用户误解原图问题。
  * [修复] 使用RecyclerView替换GridView解决改变选中状态全局刷新的问题；
@@ -60,7 +64,7 @@ V 0.3.5<br>
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-	compile 'com.lzy.widget:imagepicker:0.5.1'  //指定版本
+	compile 'com.lzy.widget:imagepicker:0.5.2'  //指定版本
 ```
 
 ## 2.功能和参数含义
