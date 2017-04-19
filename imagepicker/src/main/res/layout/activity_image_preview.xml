@@ -25,6 +25,7 @@
 
         <com.lzy.imagepicker.view.SuperCheckBox
             android:id="@+id/cb_origin"
+            android:visibility="invisible"
             style="@style/SuperCheckboxTheme"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

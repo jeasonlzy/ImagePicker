@@ -25,26 +25,36 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
  
 ### 更新日志
 
+V 0.5.3<br>
+ * [修复]矫正图片旋转导致的oom；
+ * [修复]部分手机TitleBar和状态栏重复的问题；
+
+V 0.5.1<br>
+ * [更正] 由于原图功能其实还没有做，所以本版本隐去了原图的显示。以免用户误解原图问题。
+ * [修复] 使用RecyclerView替换GridView解决改变选中状态全局刷新的问题；
+ * [提示] 虽然本次解决了全局刷新，但是如果使用的是Picasso依然会出现重新加载一张图片的问题，这是Picasso自己的问题，建议使用Glide框架。
+ 
+ 
 V 0.5.0<br>
- * [修复]解决provider冲突问题； 
+ * [修复] 解决provider冲突问题； 
 
 V 0.4.8<br>
- * [修复]解决demo中直接呼起相机并裁剪不会返回数据的bug，不需要这个功能的可以不更新;
+ * [修复] 解决demo中直接呼起相机并裁剪不会返回数据的bug，不需要这个功能的可以不更新;
  
  
 V 0.4.7<br>
- * [新增]新增可直接调起相机的功能;
- * [修复]解决可能和主项目provider冲突的潜在问题；
- * [修复]点击图片预览空指针崩溃问题；
- * [修复]使用Intent传值限制导致的崩溃问题;
- * [修复]部分机型拍照后图片旋转问题；
- * [修复]更改选择框图片背景为灰色，以免白色图看不清。
+ * [新增] 新增可直接调起相机的功能;
+ * [修复] 解决可能和主项目provider冲突的潜在问题；
+ * [修复] 点击图片预览空指针崩溃问题；
+ * [修复] 使用Intent传值限制导致的崩溃问题;
+ * [修复] 部分机型拍照后图片旋转问题；
+ * [修复] 更改选择框图片背景为灰色，以免白色图看不清。
  
  
 V 0.3.5<br>
- * [新增]提供直接调起相机的方式，并可直接设置牌照是否裁剪；
- * [修复]Android7.0设备调系统相机直接崩溃的问题；
- * [注意]如果出现 java.lang.RuntimeException: Unable to get provider android.support.v4.content.FileProvider: java.lang.SecurityException: Provider must not be exported，请直接clean再运行即可。
+ * [新增] 提供直接调起相机的方式，并可直接设置牌照是否裁剪；
+ * [修复] Android7.0设备调系统相机直接崩溃的问题；
+ * [注意] 如果出现 java.lang.RuntimeException: Unable to get provider android.support.v4.content.FileProvider: java.lang.SecurityException: Provider must not be exported，请直接clean再运行即可。
  
 ## 演示
  ![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo1.png)![image](https://github.com/jeasonlzy/Screenshots/blob/master/ImagePicker/demo2.gif)
@@ -54,7 +64,7 @@ V 0.3.5<br>
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-	compile 'com.lzy.widget:imagepicker:0.5.0'  //指定版本
+	compile 'com.lzy.widget:imagepicker:0.5.3'  //指定版本
 ```
 
 ## 2.功能和参数含义
@@ -139,7 +149,14 @@ V 0.3.5<br>
         }
     }
 ```
-### 1.然后配置图片选择器，一般在Application初始化配置一次就可以,这里就需要将上面的图片加载器设置进来,其余的配置根据需要设置
+
+### 1.在你的AndroidManifest.xml文件里面添加下面的
+```java
+<activity
+            android:name="com.lzy.imagepicker.ui.ImagePreviewDelActivity"
+            android:theme="@style/ImagePickerThemeFullScreen"/>
+```
+### 2.然后配置图片选择器，一般在Application初始化配置一次就可以,这里就需要将上面的图片加载器设置进来,其余的配置根据需要设置
 ```java
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,7 +175,7 @@ V 0.3.5<br>
         imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
 	}
 ```
-### 2.以上配置完成后，在适当的方法中开启相册，例如点击按钮时
+### 3.以上配置完成后，在适当的方法中开启相册，例如点击按钮时
 ```java
 	public void onClick(View v) {
             Intent intent = new Intent(this, ImageGridActivity.class);
@@ -167,13 +184,13 @@ V 0.3.5<br>
     }
 ```
 
-### 3.如果你想直接调用相机
+### 4.如果你想直接调用相机
 ```java
 	Intent intent = new Intent(this, ImageGridActivity.class);
 	intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
         startActivityForResult(intent, REQUEST_CODE_SELECT);
 ```
-### 4.重写`onActivityResult`方法,回调结果
+### 5.重写`onActivityResult`方法,回调结果
 ```java
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

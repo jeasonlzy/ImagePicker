@@ -210,6 +210,8 @@ public class ImagePickerActivity extends AppCompatActivity implements SeekBar.On
         }
     }
 
+
+
     private class MyAdapter extends BaseAdapter {
 
         private List<ImageItem> items;

@@ -16,6 +16,7 @@
         android:background="#111111">
 
         <GridView
+            android:visibility="gone"
             android:id="@+id/gridview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -29,6 +30,16 @@
             android:paddingTop="2dp"
             android:stretchMode="columnWidth"
             android:verticalSpacing="2dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycler"
+            android:clipToPadding="false"
+            android:paddingBottom="50dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="2dp"/>
 
         <RelativeLayout
             android:id="@+id/footer_bar"
