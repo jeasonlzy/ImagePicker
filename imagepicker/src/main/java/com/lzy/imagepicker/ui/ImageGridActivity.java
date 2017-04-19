@@ -135,6 +135,8 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_STORAGE);
             }
+        }else{
+            new ImageDataSource(this, null, this);
         }
     }
 
