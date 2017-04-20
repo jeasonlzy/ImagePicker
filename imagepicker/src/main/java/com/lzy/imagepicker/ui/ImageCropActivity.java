@@ -129,6 +129,7 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mCropImageView.setOnBitmapSaveCompleteListener(null);
         if (null != mBitmap && !mBitmap.isRecycled()) {
             mBitmap.recycle();
             mBitmap = null;
