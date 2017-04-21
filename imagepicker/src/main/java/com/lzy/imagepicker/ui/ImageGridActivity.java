@@ -28,6 +28,10 @@ import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.view.FolderPopUpWindow;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,6 +54,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     public static final int REQUEST_PERMISSION_STORAGE = 0x01;
     public static final int REQUEST_PERMISSION_CAMERA = 0x02;
     public static final String EXTRAS_TAKE_PICKERS = "TAKE";
+    public static final String EXTRAS_IMAGES = "IMAGES";
 
     private ImagePicker imagePicker;
 
@@ -89,10 +94,10 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         imagePicker.clear();
         imagePicker.addOnImageSelectedListener(this);
 
-
+        Intent data = getIntent();
         // 新增可直接拍照
-        if (getIntent() != null && getIntent().getExtras() != null){
-            directPhoto = getIntent().getBooleanExtra(EXTRAS_TAKE_PICKERS,false); // 默认不是直接打开相机
+        if (data != null && data.getExtras() != null){
+            directPhoto = data.getBooleanExtra(EXTRAS_TAKE_PICKERS,false); // 默认不是直接打开相机
             if (directPhoto){
                 if (!(checkPermission(Manifest.permission.CAMERA))) {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, ImageGridActivity.REQUEST_PERMISSION_CAMERA);
@@ -100,6 +105,9 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
                     imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
                 }
             }
+
+            ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(EXTRAS_IMAGES);
+            imagePicker.setSelectedImages(images);
         }
 
 
