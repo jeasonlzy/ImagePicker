@@ -196,6 +196,7 @@ public class ImagePickerActivity extends AppCompatActivity implements SeekBar.On
 
 
     ArrayList<ImageItem> images = null;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
