@@ -28,9 +28,6 @@ import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.view.FolderPopUpWindow;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -301,7 +298,8 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         }
         mBtnPre.setText(getResources().getString(R.string.preview_count, imagePicker.getSelectImageCount()));
 //        mImageGridAdapter.notifyDataSetChanged();
-        mRecyclerAdapter.notifyItemChanged(position);
+//        mRecyclerAdapter.notifyItemChanged(position); // 17/4/21 fix the position
+        mRecyclerAdapter.notifyItemChanged(position + (imagePicker.isShowCamera() ? 1 : 0));
     }
 
     @Override
