@@ -299,7 +299,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         mBtnPre.setText(getResources().getString(R.string.preview_count, imagePicker.getSelectImageCount()));
 //        mImageGridAdapter.notifyDataSetChanged();
 //        mRecyclerAdapter.notifyItemChanged(position); // 17/4/21 fix the position
-        // TODO:X 17/4/21 更新测试
         mRecyclerAdapter.notifyItemChanged(position + (imagePicker.isShowCamera() ? 1 : 0));
     }
 
