@@ -297,7 +297,14 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         }
         mBtnPre.setText(getResources().getString(R.string.preview_count, imagePicker.getSelectImageCount()));
 //        mImageGridAdapter.notifyDataSetChanged();
-        mRecyclerAdapter.notifyItemChanged(position);
+//        mRecyclerAdapter.notifyItemChanged(position); // 17/4/21 fix the position while click img to preview
+//        mRecyclerAdapter.notifyItemChanged(position + (imagePicker.isShowCamera() ? 1 : 0));// 17/4/24  fix the position while click right bottom preview button
+        for (int i = imagePicker.isShowCamera()? 1 : 0; i < mRecyclerAdapter.getItemCount(); i++) {
+            if (mRecyclerAdapter.getItem(i).path != null && mRecyclerAdapter.getItem(i).path.equals(item.path)) {
+                mRecyclerAdapter.notifyItemChanged(i);
+                return;
+            }
+        }
     }
 
     @Override
