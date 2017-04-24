@@ -25,6 +25,10 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
  
 ### 更新日志
 
+V 0.5.4<br>
+ * [修复]部分内存泄漏问题；
+ * [修复]新增显示已选中图片的调用方法：详情请查看demo首页的ImagePickerActivity；如果不需要此功能，则WxDemoActivity可能是你想要的。
+
 V 0.5.3<br>
  * [修复]矫正图片旋转导致的oom；
  * [修复]部分手机TitleBar和状态栏重复的问题；
@@ -64,7 +68,7 @@ V 0.3.5<br>
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-	compile 'com.lzy.widget:imagepicker:0.5.3'  //指定版本
+	compile 'com.lzy.widget:imagepicker:0.5.4'  //指定版本
 ```
 
 ## 2.功能和参数含义
