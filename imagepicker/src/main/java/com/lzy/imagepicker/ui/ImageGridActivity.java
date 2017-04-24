@@ -28,9 +28,6 @@ import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.view.FolderPopUpWindow;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,7 +102,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
                     imagePicker.takePicture(this, ImagePicker.REQUEST_CODE_TAKE);
                 }
             }
-
             ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(EXTRAS_IMAGES);
             imagePicker.setSelectedImages(images);
         }

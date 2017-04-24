@@ -26,8 +26,7 @@ public class ImageItem implements Serializable {
     public boolean equals(Object o) {
         if (o instanceof ImageItem) {
             ImageItem item = (ImageItem) o;
-
-            return this.path.equals(item.path);
+            return this.path.equalsIgnoreCase(item.path) && this.addTime == item.addTime;
         }
 
         return super.equals(o);
