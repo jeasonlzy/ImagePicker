@@ -5,7 +5,7 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
 #### 现在已经支持7.0，请大家更新使用。[详细解决方案讲解](http://www.cnblogs.com/liushilin/p/6602364.html)
 #### 有问题请大家在issues(https://github.com/jeasonlzy/ImagePicker/issues) 提出，我会一一维护。
 #### 目前项目选择回来的图片暂时未做压缩，压缩可以到[https://github.com/nanchen2251/CompressHelper](https://github.com/nanchen2251/CompressHelper)
-#### 项目编译版本为SDK为25，Tools为25.0.2，如果导入版本和你的主工程不符而导致运行崩溃，请修改你的主工程版本到更高，或者直接import该module。
+#### 从零搭建开源项目 RxJava & Retrofit & MVP & Butterknife，需要的朋友可以支持一下https://github.com/nanchen2251/AiYaGirl
 该项目参考了：
 
 * [https://github.com/pengjianbo/GalleryFinal](https://github.com/pengjianbo/GalleryFinal) 
