@@ -114,8 +114,7 @@ public class WxDemoActivity extends AppCompatActivity implements ImagePickerAdap
                                 ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
                                 Intent intent1 = new Intent(WxDemoActivity.this, ImageGridActivity.class);
                                 /* 如果需要进入选择的时候显示已经选中的图片，
-                                 * 则注释掉上面的ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
-                                 * 并打开下面的注释，详情请查看ImagePickerActivity
+                                 * 详情请查看ImagePickerActivity
                                  * */
 //                                intent1.putExtra(ImageGridActivity.EXTRAS_IMAGES,images);
                                 startActivityForResult(intent1, REQUEST_CODE_SELECT);
@@ -157,7 +156,7 @@ public class WxDemoActivity extends AppCompatActivity implements ImagePickerAdap
         } else if (resultCode == ImagePicker.RESULT_CODE_BACK) {
             //预览图片返回
             if (data != null && requestCode == REQUEST_CODE_PREVIEW) {
-                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_IMAGE_ITEMS);
+                images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_IMAGE_ITEMS);
                 if (images != null) {
                     selImageList.clear();
                     selImageList.addAll(images);
