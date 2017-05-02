@@ -19,10 +19,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 
 import com.lzy.imagepicker.R;
 
@@ -47,7 +47,7 @@ import java.util.Locale;
  * ================================================
  */
 
-public class CropImageView extends ImageView {
+public class CropImageView extends AppCompatImageView {
 
     /******************************** 中间的FocusView绘图相关的参数 *****************************/
     public enum Style {
@@ -486,6 +486,9 @@ public class CropImageView extends ImageView {
      * @return 裁剪后的图片的Bitmap
      */
     private Bitmap makeCropBitmap(Bitmap bitmap, RectF focusRect, RectF imageMatrixRect, int expectWidth, int exceptHeight, boolean isSaveRectangle) {
+        if (imageMatrixRect == null || bitmap == null){
+            return null;
+        }
         float scale = imageMatrixRect.width() / bitmap.getWidth();
         int left = (int) ((focusRect.left - imageMatrixRect.left) / scale);
         int top = (int) ((focusRect.top - imageMatrixRect.top) / scale);
