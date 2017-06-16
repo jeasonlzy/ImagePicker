@@ -1,11 +1,8 @@
 # ImagePicker
 Android自定义相册，完全仿微信UI，实现了拍照、图片选择（单选/多选）、 裁剪 、旋转、等功能。
 
-### 目前该项目原作者已经停止维护，改由[南尘](https://github.com/nanchen2251)进行维护。
-#### 现在已经支持7.0，请大家更新使用。[详细解决方案讲解](http://www.cnblogs.com/liushilin/p/6602364.html)
-#### 有问题请大家在issues(https://github.com/jeasonlzy/ImagePicker/issues) 提出，我会一一维护。
-#### 目前项目选择回来的图片暂时未做压缩，压缩可以到[https://github.com/nanchen2251/CompressHelper](https://github.com/nanchen2251/CompressHelper)
-#### 从零搭建开源项目 RxJava & Retrofit & MVP & Butterknife，需要的朋友可以支持一下https://github.com/nanchen2251/AiYaGirl
+### 目前该项目暂时停止维护
+
 该项目参考了：
 
 * [https://github.com/pengjianbo/GalleryFinal](https://github.com/pengjianbo/GalleryFinal) 
@@ -14,14 +11,8 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
 喜欢原作的可以去使用。同时欢迎大家下载体验本项目，如果使用过程中遇到什么问题，欢迎反馈。
 
 ### 联系方式
- * 原作者邮箱地址： liaojeason@126.com （建议大家加入下面的QQ群，原作者很忙。）
- * QQ群： （1群:489873144，原作者是群主，还可以用OkGo哦）   
- （2群：118116509，南尘是群主，可能妹纸新手多一点） 
- * 本群旨在为使用我的github项目的人提供方便，如果遇到问题欢迎在群里提问。个人能力也有限，希望一起学习一起进步。
- * [南尘博客园](http://www.cnblogs.com/liushilin/)  
- * [南尘github](https://github.com/nanchen2251)
- 
- 
+ * 邮箱地址： liaojeason@126.com 
+ * QQ群： 1群（[廖子尧](https://github.com/jeasonlzy)）： 489873144   2群（[南尘](http://www.cnblogs.com/liushilin/)）：118116509 
  
 ### 更新日志
 
