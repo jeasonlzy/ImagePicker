@@ -83,6 +83,12 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
                 //查询数据
                 String imageName = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[0]));
                 String imagePath = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[1]));
+                
+                File file = new File(imagePath);
+                if (file.exists() && file.length() > 0) {
+                    continue;
+                }
+
                 long imageSize = data.getLong(data.getColumnIndexOrThrow(IMAGE_PROJECTION[2]));
                 int imageWidth = data.getInt(data.getColumnIndexOrThrow(IMAGE_PROJECTION[3]));
                 int imageHeight = data.getInt(data.getColumnIndexOrThrow(IMAGE_PROJECTION[4]));
