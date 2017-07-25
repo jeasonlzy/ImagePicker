@@ -85,7 +85,7 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
                 String imagePath = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[1]));
                 
                 File file = new File(imagePath);
-                if (file.exists() && file.length() > 0) {
+                if (!file.exists() || file.length() <= 0) {
                     continue;
                 }
 
