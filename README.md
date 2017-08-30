@@ -1,7 +1,8 @@
 # ImagePicker
 Android自定义相册，完全仿微信UI，实现了拍照、图片选择（单选/多选）、 裁剪 、旋转、等功能。
 
-### 目前该项目暂时停止维护
+### 由于本人时间有限，该项目暂时停止维护
+如果你发现有bug，或者好的建议，可以提merge request，我测试通过后会合并的。
 
 该项目参考了：
 
@@ -15,6 +16,11 @@ Android自定义相册，完全仿微信UI，实现了拍照、图片选择（�
  * QQ群： 1群（[廖子尧](https://github.com/jeasonlzy)）： 489873144   2群（[南尘](http://www.cnblogs.com/liushilin/)）：118116509 
  
 ### 更新日志
+
+V 0.6.0<br>
+ * 合并两个merge request
+ * [调整UI,真正的完全仿微信](https://github.com/jeasonlzy/ImagePicker/pull/193)
+ * [fix(location): 解决不合法图片导致的Bug](https://github.com/jeasonlzy/ImagePicker/pull/188)
 
 V 0.5.5<br>
  * [修复]选择图页面进入预览取消选择或者选择后返回列表不更新的问题；
@@ -63,7 +69,7 @@ V 0.3.5<br>
 
 使用前，对于Android Studio的用户，可以选择添加:
 ```java
-	compile 'com.lzy.widget:imagepicker:0.5.5'  //指定版本
+	compile 'com.lzy.widget:imagepicker:0.6.0'  //指定版本
 ```
 
 ## 2.功能和参数含义

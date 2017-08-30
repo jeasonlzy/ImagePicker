@@ -36,7 +36,6 @@ import java.util.Locale;
  * 创建日期：2016/5/19
  * 描    述：图片选择的入口类
  * 修订历史：
- * <p>
  * 2017-03-20
  *
  * @author nanchen
@@ -231,7 +230,6 @@ public class ImagePicker {
         return mSelectedImages;
     }
 
-
     public void clearSelectedImages() {
         if (mSelectedImages != null) mSelectedImages.clear();
     }
@@ -258,8 +256,7 @@ public class ImagePicker {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         takePictureIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (takePictureIntent.resolveActivity(activity.getPackageManager()) != null) {
-            if (Utils.existSDCard())
-                takeImageFile = new File(Environment.getExternalStorageDirectory(), "/DCIM/camera/");
+            if (Utils.existSDCard()) takeImageFile = new File(Environment.getExternalStorageDirectory(), "/DCIM/camera/");
             else takeImageFile = Environment.getDataDirectory();
             takeImageFile = createFile(takeImageFile, "IMG_", ".jpg");
             if (takeImageFile != null) {
@@ -273,19 +270,16 @@ public class ImagePicker {
                     uri = Uri.fromFile(takeImageFile);
                 } else {
 
-
                     /**
                      * 7.0 调用系统相机拍照不再允许使用Uri方式，应该替换为FileProvider
                      * 并且这样可以解决MIUI系统上拍照返回size为0的情况
                      */
                     uri = FileProvider.getUriForFile(activity, ProviderUtil.getFileProviderName(activity), takeImageFile);
                     //加入uri权限 要不三星手机不能拍照
-                    List<ResolveInfo> resInfoList = activity.getPackageManager().queryIntentActivities
-                            (takePictureIntent, PackageManager.MATCH_DEFAULT_ONLY);
+                    List<ResolveInfo> resInfoList = activity.getPackageManager().queryIntentActivities(takePictureIntent, PackageManager.MATCH_DEFAULT_ONLY);
                     for (ResolveInfo resolveInfo : resInfoList) {
                         String packageName = resolveInfo.activityInfo.packageName;
-                        activity.grantUriPermission(packageName, uri, Intent
-                                .FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        activity.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     }
                 }
 
@@ -390,6 +384,5 @@ public class ImagePicker {
         outState.putInt("focusWidth", focusWidth);
         outState.putInt("focusHeight", focusHeight);
     }
-
 
 }
