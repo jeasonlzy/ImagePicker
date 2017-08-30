@@ -6,12 +6,12 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
-import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.adapter.ImagePageAdapter;
-import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.view.ViewPagerFixed;
 
 import java.util.ArrayList;
@@ -44,16 +44,15 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
         setContentView(R.layout.activity_image_preview);
 
         mCurrentPosition = getIntent().getIntExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, 0);
-        isFromItems = getIntent().getBooleanExtra(ImagePicker.EXTRA_FROM_ITEMS,false);
+        isFromItems = getIntent().getBooleanExtra(ImagePicker.EXTRA_FROM_ITEMS, false);
 
-        if (isFromItems){
+        if (isFromItems) {
             // 据说这样会导致大量图片崩溃
             mImageItems = (ArrayList<ImageItem>) getIntent().getSerializableExtra(ImagePicker.EXTRA_IMAGE_ITEMS);
-        }else{
+        } else {
             // 下面采用弱引用会导致预览崩溃
-            mImageItems =  (ArrayList<ImageItem>) DataHolder.getInstance().retrieve(DataHolder.DH_CURRENT_IMAGE_FOLDER_ITEMS);
+            mImageItems = (ArrayList<ImageItem>) DataHolder.getInstance().retrieve(DataHolder.DH_CURRENT_IMAGE_FOLDER_ITEMS);
         }
-
 
         imagePicker = ImagePicker.getInstance();
         selectedImages = imagePicker.getSelectedImages();

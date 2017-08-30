@@ -87,7 +87,7 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
                 ImageItem imageItem = mImageItems.get(mCurrentPosition);
                 int selectLimit = imagePicker.getSelectLimit();
                 if (mCbCheck.isChecked() && selectedImages.size() >= selectLimit) {
-                    Toast.makeText(ImagePreviewActivity.this, ImagePreviewActivity.this.getString(R.string.ip_select_limit, selectLimit), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ImagePreviewActivity.this, getString(R.string.ip_select_limit, selectLimit), Toast.LENGTH_SHORT).show();
                     mCbCheck.setChecked(false);
                 } else {
                     imagePicker.addSelectedImageItem(mCurrentPosition, imageItem, mCbCheck.isChecked());
@@ -103,9 +103,7 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
     @Override
     public void onImageSelected(int position, ImageItem item, boolean isAdd) {
         if (imagePicker.getSelectImageCount() > 0) {
-            mBtnOk.setText(getString(R.string.ip_select_complete,
-                    String.valueOf(imagePicker.getSelectImageCount()),
-                    String.valueOf(imagePicker.getSelectLimit())));
+            mBtnOk.setText(getString(R.string.ip_select_complete, imagePicker.getSelectImageCount(), imagePicker.getSelectLimit()));
         } else {
             mBtnOk.setText(getString(R.string.ip_complete));
         }

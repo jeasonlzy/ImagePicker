@@ -41,13 +41,10 @@ import java.util.List;
  * 创建日期：2016/5/19
  * 描    述：
  * 修订历史：
- * <p>
  * 2017-03-17
  *
  * @author nanchen
  *         新增可直接传递是否裁剪参数，以及直接拍照
- *         <p>
- *         <p>
  *         ================================================
  */
 public class ImageGridActivity extends ImageBaseActivity implements ImageDataSource.OnImagesLoadedListener, OnImageItemClickListener, ImagePicker.OnImageSelectedListener, View.OnClickListener {
@@ -72,7 +69,6 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
     private boolean directPhoto = false; // 默认不是直接调取相机
     private RecyclerView mRecyclerView;
     private ImageRecyclerAdapter mRecyclerAdapter;
-
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -110,9 +106,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             imagePicker.setSelectedImages(images);
         }
 
-
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
-
 
         findViewById(R.id.btn_back).setOnClickListener(this);
         mBtnOk = (Button) findViewById(R.id.btn_ok);

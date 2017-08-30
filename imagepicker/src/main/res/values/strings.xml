@@ -1,12 +1,12 @@
 <resources>
     <string name="ip_all_images">所有图片</string>
     <string name="ip_folder_image_count">共%1$d张</string>
-    <string name="ip_preview_image_count">%1$s/%2$s</string>
-    <string name="ip_select_limit">最多选择%1$s张图片</string>
+    <string name="ip_preview_image_count">%1$d/%2$d</string>
+    <string name="ip_select_limit">最多选择%1$d张图片</string>
     <string name="ip_complete">完成</string>
-    <string name="ip_select_complete">完成(%1$s/%2$s)</string>
+    <string name="ip_select_complete">完成(%1$d/%2$d)</string>
     <string name="ip_preview">预览</string>
-    <string name="ip_preview_count">预览(%1$s)</string>
+    <string name="ip_preview_count">预览(%1$d)</string>
     <string name="ip_photo_crop">图片裁剪</string>
     <string name="ip_origin">原图</string>
     <string name="ip_origin_size">原图(%1$s)</string>
