@@ -126,13 +126,16 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
         View rootView;
         ImageView ivThumb;
         View mask;
+        View checkView;
         SuperCheckBox cbCheck;
+
 
         ImageViewHolder(View itemView) {
             super(itemView);
             rootView = itemView;
             ivThumb = (ImageView) itemView.findViewById(R.id.iv_thumb);
             mask = itemView.findViewById(R.id.mask);
+            checkView=itemView.findViewById(R.id.checkView);
             cbCheck = (SuperCheckBox) itemView.findViewById(R.id.cb_check);
             itemView.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mImageSize)); //让图片是个正方形
         }
@@ -145,12 +148,13 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
                     if (listener != null) listener.onImageItemClick(rootView, imageItem, position);
                 }
             });
-            cbCheck.setOnClickListener(new View.OnClickListener() {
+            checkView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    cbCheck.setChecked(!cbCheck.isChecked());
                     int selectLimit = imagePicker.getSelectLimit();
                     if (cbCheck.isChecked() && mSelectedImages.size() >= selectLimit) {
-                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.select_limit, selectLimit), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.ip_select_limit, selectLimit), Toast.LENGTH_SHORT).show();
                         cbCheck.setChecked(false);
                         mask.setVisibility(View.GONE);
                     } else {

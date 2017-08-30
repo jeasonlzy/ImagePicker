@@ -27,8 +27,18 @@ public class PicassoImageLoader implements ImageLoader {
     public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
         Picasso.with(activity)//
                 .load(Uri.fromFile(new File(path)))//
-                .placeholder(R.mipmap.default_image)//
-                .error(R.mipmap.default_image)//
+                .placeholder(R.drawable.ic_default_image)//
+                .error(R.drawable.ic_default_image)//
+                .resize(width, height)//
+                .centerInside()//
+                .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)//
+                .into(imageView);
+    }
+
+    @Override
+    public void displayImagePreview(Activity activity, String path, ImageView imageView, int width, int height) {
+        Picasso.with(activity)//
+                .load(Uri.fromFile(new File(path)))//
                 .resize(width, height)//
                 .centerInside()//
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)//

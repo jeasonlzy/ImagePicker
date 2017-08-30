@@ -1,5 +1,8 @@
 package com.lzy.imagepicker.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**
@@ -11,7 +14,7 @@ import java.io.Serializable;
  * 修订历史：
  * ================================================
  */
-public class ImageItem implements Serializable {
+public class ImageItem implements Serializable, Parcelable {
 
     public String name;       //图片的名字
     public String path;       //图片的路径
@@ -31,4 +34,46 @@ public class ImageItem implements Serializable {
 
         return super.equals(o);
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.path);
+        dest.writeLong(this.size);
+        dest.writeInt(this.width);
+        dest.writeInt(this.height);
+        dest.writeString(this.mimeType);
+        dest.writeLong(this.addTime);
+    }
+
+    public ImageItem() {
+    }
+
+    protected ImageItem(Parcel in) {
+        this.name = in.readString();
+        this.path = in.readString();
+        this.size = in.readLong();
+        this.width = in.readInt();
+        this.height = in.readInt();
+        this.mimeType = in.readString();
+        this.addTime = in.readLong();
+    }
+
+    public static final Parcelable.Creator<ImageItem> CREATOR = new Parcelable.Creator<ImageItem>() {
+        @Override
+        public ImageItem createFromParcel(Parcel source) {
+            return new ImageItem(source);
+        }
+
+        @Override
+        public ImageItem[] newArray(int size) {
+            return new ImageItem[size];
+        }
+    };
 }

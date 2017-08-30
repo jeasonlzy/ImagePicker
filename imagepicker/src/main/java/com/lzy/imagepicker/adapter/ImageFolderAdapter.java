@@ -17,6 +17,7 @@ import com.lzy.imagepicker.bean.ImageFolder;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * ================================================
  * 作    者：jeasonlzy（廖子尧 Github地址：https://github.com/jeasonlzy0216
@@ -78,7 +79,7 @@ public class ImageFolderAdapter extends BaseAdapter {
 
         ImageFolder folder = getItem(position);
         holder.folderName.setText(folder.name);
-        holder.imageCount.setText(mActivity.getString(R.string.folder_image_count, folder.images.size()));
+        holder.imageCount.setText(mActivity.getString(R.string.ip_folder_image_count, folder.images.size()));
         imagePicker.getImageLoader().displayImage(mActivity, folder.cover.path, holder.cover, mImageSize, mImageSize);
 
         if (lastSelected == position) {
