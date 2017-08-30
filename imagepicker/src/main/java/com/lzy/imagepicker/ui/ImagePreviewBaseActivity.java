@@ -95,4 +95,16 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
 
     /** 单击时，隐藏头和尾 */
     public abstract void onImageSingleTap();
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        ImagePicker.getInstance().restoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        ImagePicker.getInstance().saveInstanceState(outState);
+    }
 }
