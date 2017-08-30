@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
@@ -351,5 +352,44 @@ public class ImagePicker {
             l.onImageSelected(position, item, isAdd);
         }
     }
+
+    /**
+     * 用于手机内存不足，进程被系统回收，重启时的状态恢复
+     */
+    public void restoreInstanceState(Bundle savedInstanceState) {
+        cropCacheFolder = (File) savedInstanceState.getSerializable("cropCacheFolder");
+        takeImageFile = (File) savedInstanceState.getSerializable("takeImageFile");
+        imageLoader = (ImageLoader) savedInstanceState.getSerializable("imageLoader");
+        style = (CropImageView.Style) savedInstanceState.getSerializable("style");
+        multiMode = savedInstanceState.getBoolean("multiMode");
+        crop = savedInstanceState.getBoolean("crop");
+        showCamera = savedInstanceState.getBoolean("showCamera");
+        isSaveRectangle = savedInstanceState.getBoolean("isSaveRectangle");
+        selectLimit = savedInstanceState.getInt("selectLimit");
+        outPutX = savedInstanceState.getInt("outPutX");
+        outPutY = savedInstanceState.getInt("outPutY");
+        focusWidth = savedInstanceState.getInt("focusWidth");
+        focusHeight = savedInstanceState.getInt("focusHeight");
+    }
+
+    /**
+     * 用于手机内存不足，进程被系统回收时的状态保存
+     */
+    public void saveInstanceState(Bundle outState) {
+        outState.putSerializable("cropCacheFolder", cropCacheFolder);
+        outState.putSerializable("takeImageFile", takeImageFile);
+        outState.putSerializable("imageLoader", imageLoader);
+        outState.putSerializable("style", style);
+        outState.putBoolean("multiMode", multiMode);
+        outState.putBoolean("crop", crop);
+        outState.putBoolean("showCamera", showCamera);
+        outState.putBoolean("isSaveRectangle", isSaveRectangle);
+        outState.putInt("selectLimit", selectLimit);
+        outState.putInt("outPutX", outPutX);
+        outState.putInt("outPutY", outPutY);
+        outState.putInt("focusWidth", focusWidth);
+        outState.putInt("focusHeight", focusHeight);
+    }
+
 
 }

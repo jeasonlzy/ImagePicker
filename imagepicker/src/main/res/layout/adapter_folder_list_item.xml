@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#FFFFFF"
-              android:gravity="center_vertical"
-              android:orientation="horizontal">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_folder_item"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/iv_cover"
-        android:layout_width="68dp"
-        android:layout_height="68dp"
-        android:layout_margin="8dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/default_image"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_image_folder"
+        android:layout_margin="12dp">
+
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="6dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_default_image" />
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -25,9 +35,9 @@
             android:id="@+id/tv_folder_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/all_images"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"/>
+            android:text="@string/ip_all_images"
+            android:textColor="#212121"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_image_count"
@@ -35,16 +45,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="共0张"
-            android:textColor="#d2d2d7"
-            android:textSize="14sp"/>
+            android:textColor="#999999"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_folder_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:src="@mipmap/list_selected"/>
+        android:layout_marginRight="20dp"
+        app:srcCompat="@drawable/ic_vector_check" />
 
 </LinearLayout>
