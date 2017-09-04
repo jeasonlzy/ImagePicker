@@ -65,13 +65,11 @@ public class Utils {
 
     /** dp转px */
     public static int dp2px(Context context, float dpVal) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpVal, context.getResources().getDisplayMetrics());
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, context.getResources().getDisplayMetrics());
     }
 
     /**
      * 判断手机是否含有虚拟按键  99%
-     *
      */
     public static boolean hasVirtualNavigationBar(Context context) {
         boolean hasSoftwareKeys = true;
@@ -106,9 +104,6 @@ public class Utils {
      */
     public static int getNavigationBarHeight(Context context) {
         int resourceId = context.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        return resourceId > 0 ?
-                context.getResources().getDimensionPixelSize(resourceId) :
-                0;
+        return resourceId > 0 ? context.getResources().getDimensionPixelSize(resourceId) : 0;
     }
-
 }
