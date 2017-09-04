@@ -55,7 +55,7 @@ public class NavigationBarChangeListener implements ViewTreeObserver.OnGlobalLay
                 Utils.getNavigationBarHeight(rootView.getContext()) : 0;
         if (heightDiff >= navigationBarHeight && heightDiff < navigationBarHeight * 2) {
             if (!isShowNavigationBar && listener != null) {
-                listener.onNavigationBarShow(orientation, navigationBarHeight);
+                listener.onNavigationBarShow(orientation, heightDiff);
             }
             isShowNavigationBar = true;
         } else {
