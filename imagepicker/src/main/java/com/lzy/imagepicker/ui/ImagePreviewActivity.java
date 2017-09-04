@@ -2,7 +2,6 @@ package com.lzy.imagepicker.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.text.format.Formatter;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.util.NavigationBarChangeListener;
 import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.view.SuperCheckBox;
 
@@ -37,6 +37,7 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
     private SuperCheckBox mCbOrigin;               //原图
     private Button mBtnOk;                         //确认图片的选择
     private View bottomBar;
+    private View marginView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +45,16 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
 
         isOrigin = getIntent().getBooleanExtra(ImagePreviewActivity.ISORIGIN, false);
         imagePicker.addOnImageSelectedListener(this);
-
-        mBtnOk = (Button) topBar.findViewById(R.id.btn_ok);
+        mBtnOk = (Button) findViewById(R.id.btn_ok);
         mBtnOk.setVisibility(View.VISIBLE);
         mBtnOk.setOnClickListener(this);
 
         bottomBar = findViewById(R.id.bottom_bar);
         bottomBar.setVisibility(View.VISIBLE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Utils.hasVirtualNavigationBar(this)) {
-            View marginView = findViewById(R.id.margin_bottom);
-            ViewGroup.LayoutParams layoutParams = marginView.getLayoutParams();
-            layoutParams.height = Utils.getNavigationBarHeight(this);
-            marginView.requestLayout();
-        }
+
         mCbCheck = (SuperCheckBox) findViewById(R.id.cb_check);
         mCbOrigin = (SuperCheckBox) findViewById(R.id.cb_origin);
+        marginView = findViewById(R.id.margin_bottom);
         mCbOrigin.setText(getString(R.string.ip_origin));
         mCbOrigin.setOnCheckedChangeListener(this);
         mCbOrigin.setChecked(isOrigin);
@@ -94,7 +90,39 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
                 }
             }
         });
+        NavigationBarChangeListener.with(this).setListener(new NavigationBarChangeListener.OnSoftInputStateChangeListener() {
+            @Override
+            public void onNavigationBarShow(int orientation, int height) {
+                marginView.setVisibility(View.VISIBLE);
+                ViewGroup.LayoutParams layoutParams = marginView.getLayoutParams();
+                if (layoutParams.height == 0) {
+                    layoutParams.height = Utils.getNavigationBarHeight(ImagePreviewActivity.this);
+                    marginView.requestLayout();
+                }
+            }
+
+            @Override
+            public void onNavigationBarHide(int orientation) {
+                marginView.setVisibility(View.GONE);
+            }
+        });
+        NavigationBarChangeListener.with(this, NavigationBarChangeListener.ORIENTATION_HORIZONTAL)
+                .setListener(new NavigationBarChangeListener.OnSoftInputStateChangeListener() {
+                    @Override
+                    public void onNavigationBarShow(int orientation, int height) {
+                        topBar.setPadding(0, 0, height, 0);
+                        bottomBar.setPadding(0, 0, height, 0);
+                    }
+
+                    @Override
+                    public void onNavigationBarHide(int orientation) {
+                        topBar.setPadding(0, 0, 0, 0);
+                        bottomBar.setPadding(0, 0, 0, 0);
+                    }
+                });
     }
+
+
 
     /**
      * 图片添加成功后，修改当前图片的选中数量

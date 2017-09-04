@@ -30,6 +30,7 @@
 
         <activity
             android:name=".ui.ImagePreviewDelActivity"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/ImagePickerThemeFullScreen"/>
 
         <provider
