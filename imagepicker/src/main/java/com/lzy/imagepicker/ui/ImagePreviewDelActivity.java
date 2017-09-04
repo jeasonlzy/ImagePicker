@@ -2,6 +2,7 @@ package com.lzy.imagepicker.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
+import com.lzy.imagepicker.util.NavigationBarChangeListener;
 
 /**
  * ================================================
@@ -42,6 +44,18 @@ public class ImagePreviewDelActivity extends ImagePreviewBaseActivity implements
                 mTitleCount.setText(getString(R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));
             }
         });
+        NavigationBarChangeListener.with(this, NavigationBarChangeListener.ORIENTATION_HORIZONTAL)
+                .setListener(new NavigationBarChangeListener.OnSoftInputStateChangeListener() {
+                    @Override
+                    public void onNavigationBarShow(int orientation, int height) {
+                        topBar.setPadding(0, 0, height, 0);
+                    }
+
+                    @Override
+                    public void onNavigationBarHide(int orientation) {
+                        topBar.setPadding(0, 0, 0, 0);
+                    }
+                });
     }
 
     @Override
